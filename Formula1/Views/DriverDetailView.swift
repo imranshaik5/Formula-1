@@ -3,6 +3,12 @@ import Kingfisher
 
 struct DriverDetailView: View {
     @StateObject private var viewModel: DriverDetailViewModel
+    @StateObject private var f1dbService = F1DBService.shared
+
+    private var f1dbDriver: F1DBDriver? {
+        let f1dbID = viewModel.driver.id.replacingOccurrences(of: "_", with: "-")
+        return f1dbService.driver(id: f1dbID)
+    }
 
     @MainActor
     init(viewModel: DriverDetailViewModel) {
@@ -14,6 +20,18 @@ struct DriverDetailView: View {
             VStack(spacing: 16) {
                 heroSection
                 statsSection
+                if let driver = f1dbDriver {
+                    F1DBCareerStatsSection(driver: driver)
+                    if let rels = driver.familyRelationships, !rels.isEmpty {
+                        F1DBFamilyRelationshipsSection(
+                            relationships: rels,
+                            driverIDLookup: { id in
+                                let d = f1dbService.driver(id: id)
+                                return d?.name ?? id
+                            }
+                        )
+                    }
+                }
                 if !viewModel.bestResults.isEmpty {
                     bestMomentsSection
                 }
@@ -29,6 +47,7 @@ struct DriverDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadDriverDetails()
+            if !f1dbService.isLoaded { await f1dbService.load() }
         }
     }
 

@@ -172,10 +172,15 @@ struct RaceResultTable: Decodable {
 struct JolpicaRaceWithResult: Decodable {
     let season: String
     let round: String
+    let raceName: String
+    let circuit: JolpicaCircuit
+    let date: String
+    let time: String?
     let results: [JolpicaResult]
 
     enum CodingKeys: String, CodingKey {
-        case season, round
+        case season, round, raceName, date, time
+        case circuit = "Circuit"
         case results = "Results"
     }
 }

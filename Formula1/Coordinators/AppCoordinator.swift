@@ -49,7 +49,10 @@ extension AppCoordinator {
                 viewModel: DriverDetailViewModel(driver: driver, driverService: driverService)
             )
         case .constructorDetail(let standing):
-            ConstructorDetailView(standing: standing)
+            ConstructorDetailView(
+                standing: standing,
+                constructorService: constructorService
+            )
         }
     }
 }

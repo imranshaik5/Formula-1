@@ -2,7 +2,27 @@ import SwiftUI
 
 struct RaceDetailView: View {
     @StateObject private var viewModel: RaceDetailViewModel
+    @StateObject private var f1dbService = F1DBService.shared
     var onDriverTap: ((Driver) -> Void)?
+
+    private var raceYear: Int {
+        let parts = viewModel.race.id.split(separator: "-")
+        return Int(parts.first ?? "2026") ?? 2026
+    }
+
+    private var f1dbRace: F1DBRace? {
+        f1dbService.race(year: raceYear, round: viewModel.race.round)
+    }
+
+    private func f1dbDriverName(for id: String) -> String {
+        let d = f1dbService.driver(id: id)
+        return d?.name ?? id.replacingOccurrences(of: "-", with: " ").capitalized
+    }
+
+    private func f1dbTeamColor(for id: String) -> Color {
+        let c = f1dbService.constructor(id: id)
+        return c.map { Color.f1Team($0.name) } ?? .f1TextSecondary
+    }
 
     @MainActor
     init(viewModel: RaceDetailViewModel, onDriverTap: ((Driver) -> Void)? = nil) {
@@ -33,6 +53,7 @@ struct RaceDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadRaceDetails()
+            if !f1dbService.isLoaded { await f1dbService.load() }
         }
         .overlay {
             if viewModel.isLoading {
@@ -84,9 +105,53 @@ struct RaceDetailView: View {
                     .padding(.horizontal)
             }
 
-            sectionDivider("RACE DETAILS")
-            raceDetailsSection(result)
-                .padding(.horizontal)
+        sectionDivider("RACE DETAILS")
+        raceDetailsSection(result)
+            .padding(.horizontal)
+
+        if let gp = f1dbRace.flatMap({ f1dbService.grandPrix(id: $0.grandPrixId) }) {
+            sectionDivider("GRAND PRIX")
+            F1DBGrandPrixBadgeSection(gp: gp)
+        }
+        if let race = f1dbRace {
+            if let quali = race.qualifyingResults, !quali.isEmpty {
+                sectionDivider("QUALIFYING")
+                F1DBQualifyingResultsSection(
+                    qualifying: quali,
+                    driverNameLookup: f1dbDriverName(for:),
+                    teamColorLookup: f1dbTeamColor(for:)
+                )
+            }
+            if let grid = race.startingGridPositions, !grid.isEmpty {
+                sectionDivider("STARTING GRID")
+                F1DBStartingGridSection(
+                    grid: grid,
+                    driverNameLookup: f1dbDriverName(for:),
+                    teamColorLookup: f1dbTeamColor(for:)
+                )
+            }
+            if let fls = race.fastestLaps, !fls.isEmpty {
+                sectionDivider("FASTEST LAPS")
+                F1DBFastestLapsSection(
+                    fastestLaps: fls,
+                    driverNameLookup: f1dbDriverName(for:),
+                    teamColorLookup: f1dbTeamColor(for:)
+                )
+            }
+            if let stops = race.pitStops, !stops.isEmpty {
+                sectionDivider("PIT STOPS")
+                F1DBPitStopsSection(
+                    pitStops: stops,
+                    driverNameLookup: f1dbDriverName(for:)
+                )
+            }
+            if let dotd = race.driverOfTheDayResults, !dotd.isEmpty {
+                sectionDivider("DRIVER OF THE DAY")
+                F1DBDriverOfTheDaySection(
+                    dotd: dotd,
+                    driverNameLookup: f1dbDriverName(for:)
+                )
+            }
         }
 
         sectionDivider("GRID vs FINISH")
