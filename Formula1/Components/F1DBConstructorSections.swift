@@ -74,11 +74,11 @@ struct F1DBConstructorChronologySection: View {
         HStack(spacing: 12) {
             VStack(spacing: 0) {
                 Circle()
-                    .fill(Color.f1Red)
+                    .fill(Color.f1Accent)
                     .frame(width: 10, height: 10)
                 if index < chronology.count - 1 {
                     Rectangle()
-                        .fill(Color.f1Red.opacity(0.3))
+                        .fill(Color.f1Accent.opacity(0.3))
                         .frame(width: 2, height: 30)
                 }
             }

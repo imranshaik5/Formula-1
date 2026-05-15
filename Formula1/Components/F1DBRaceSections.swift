@@ -8,10 +8,10 @@ struct F1DBGrandPrixBadge: View {
         HStack(spacing: 8) {
             Text(gp.abbreviation)
                 .font(.system(.caption, design: .monospaced).weight(.heavy))
-                .foregroundColor(.f1Red)
+                .foregroundColor(.f1Accent)
                 .padding(.horizontal, 6)
                 .padding(.vertical, 3)
-                .background(Color.f1Red.opacity(0.15))
+                .background(Color.f1Accent.opacity(0.15))
                 .cornerRadius(4)
 
             Text("Round \(gp.totalRacesHeld)")
@@ -42,7 +42,7 @@ struct F1DBGrandPrixBadgeSection: View {
 
                     Text(gp.abbreviation)
                         .font(.system(.title, design: .monospaced).weight(.black))
-                        .foregroundColor(.f1Red.opacity(0.3))
+                        .foregroundColor(.f1Accent.opacity(0.3))
                 }
 
                 HStack(spacing: 12) {
@@ -138,7 +138,7 @@ struct F1DBQualifyingResultsSection: View {
         }
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
-        .background(result.positionNumber == 1 ? Color.f1Red.opacity(0.08) : Color.clear)
+        .background(result.positionNumber == 1 ? Color.f1Accent.opacity(0.08) : Color.clear)
         .cornerRadius(4)
     }
 }
@@ -188,7 +188,7 @@ struct F1DBStartingGridSection: View {
             if let penalty = entry.gridPenalty {
                 Text(penalty)
                     .font(.system(.caption2, design: .rounded))
-                    .foregroundColor(.f1Red)
+                    .foregroundColor(.f1Accent)
             }
 
             if let time = entry.time {
@@ -275,7 +275,7 @@ struct F1DBPitStopsSection: View {
 
                             Text(stop.time)
                                 .font(.system(.caption, design: .monospaced).weight(.bold))
-                                .foregroundColor(.f1Red)
+                                .foregroundColor(.f1Accent)
                         }
                         .padding(.vertical, 2)
                     }
