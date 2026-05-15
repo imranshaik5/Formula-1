@@ -1,0 +1,78 @@
+// Race List
+"race_list.title" = "Race Calendar";
+"race_list.loading" = "Loading races...";
+"race_list.error_title" = "Error Loading Races";
+"race_list.up_next" = "UP NEXT";
+"race_list.season_calendar" = "Season Calendar";
+"race_list.completed" = "Completed";
+"race_list.live" = "LIVE";
+"race_list.upcoming" = "Upcoming";
+
+// Race Detail
+"race_detail.title" = "Race Details";
+"race_detail.race_starts_in" = "Race starts in";
+"race_detail.race_is_live" = "Race is Live";
+"race_detail.race_completed" = "Race Completed";
+"race_detail.round" = "Round %d";
+"race_detail.winner" = "Winner: %@";
+"race_detail.podium" = "Podium";
+"race_detail.circuit_info" = "Circuit Information";
+"race_detail.circuit_label" = "Circuit";
+"race_detail.location_label" = "Location";
+"race_detail.country_label" = "Country";
+
+// Driver List
+"driver_list.title" = "Driver Standings";
+"driver_list.loading" = "Loading drivers...";
+"driver_list.error_title" = "Error Loading Drivers";
+"driver_list.position" = "P%d";
+
+// Driver Detail
+"driver_detail.position" = "P%d in standings";
+"driver_detail.season_stats" = "Season Statistics";
+"driver_detail.position_label" = "Position";
+"driver_detail.points_label" = "Points";
+"driver_detail.number_label" = "Number";
+"driver_detail.points_progress" = "Points Progress";
+"driver_detail.team_info" = "Team Information";
+"driver_detail.driver_number" = "Driver #%d";
+
+// Constructor List
+"constructor_list.title" = "Constructors";
+"constructor_list.loading" = "Loading standings...";
+"constructor_list.error_title" = "Error Loading Standings";
+"constructor_list.points" = "points";
+"constructor_list.wins" = "%d wins";
+"constructor_list.win" = "%d win";
+
+// Constructor Detail
+"constructor_detail.position" = "P%d in standings";
+"constructor_detail.season_stats" = "Season Statistics";
+"constructor_detail.position_label" = "Position";
+"constructor_detail.points_label" = "Points";
+"constructor_detail.wins_label" = "Wins";
+"constructor_detail.points_progress" = "Points Progress";
+
+// News List
+"news_list.title" = "News";
+"news_list.loading" = "Loading news...";
+"news_list.empty_title" = "No News";
+"news_list.empty_description" = "Check back later for F1 news updates.";
+
+// Splash
+"splash.formula1" = "FORMULA 1";
+"splash.start_engines" = "START YOUR ENGINES";
+"splash.get_ready" = "GET READY FOR RACE DAY";
+
+// Countdown
+"countdown.race_weekend_live" = "Race Weekend Live!";
+"countdown.days" = "days";
+"countdown.hrs" = "hrs";
+"countdown.min" = "min";
+"countdown.sec" = "sec";
+
+// Podium
+"podium.position" = "#%d";
+
+// Common
+"common.bullet" = "•";
