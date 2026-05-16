@@ -8,12 +8,19 @@ struct CircuitTrackView: UIViewRepresentable {
     func makeUIView(context: Context) -> WKWebView {
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = false
+        config.websiteDataStore = .nonPersistent()
+        let preferences = WKPreferences()
+        preferences.javaScriptEnabled = false
+        config.preferences = preferences
+        if #available(iOS 17.0, *) {
+            config.upgradeKnownHostsToHTTPS = false
+        }
         let webView = WKWebView(frame: .zero, configuration: config)
         webView.isOpaque = false
         webView.backgroundColor = .clear
         webView.scrollView.isScrollEnabled = false
         webView.navigationDelegate = context.coordinator
-        let request = URLRequest(url: svgURL)
+        let request = URLRequest(url: svgURL, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         webView.load(request)
         return webView
     }

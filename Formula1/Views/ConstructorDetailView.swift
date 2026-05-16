@@ -10,6 +10,7 @@ struct ConstructorDetailView: View {
         return f1dbService.constructor(id: f1dbID)
     }
 
+    @MainActor
     init(standing: ConstructorStanding, constructorService: ConstructorServiceProtocol = ConstructorService()) {
         _viewModel = StateObject(wrappedValue: ConstructorDetailViewModel(
             standing: standing,

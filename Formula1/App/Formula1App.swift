@@ -24,11 +24,9 @@ struct Formula1App: App {
                 }
                 .environmentObject(coordinator)
                 .environmentObject(f1dbService)
+                .environmentObject(AIConfigStore.shared)
                 .preferredColorScheme(.dark)
                 .transition(.opacity)
-                .task {
-                    if !f1dbService.isLoaded { await f1dbService.load() }
-                }
             }
         }
     }

@@ -186,8 +186,9 @@ struct RaceDetailView: View {
     private var statusSection: some View {
         switch viewModel.race.status {
         case .upcoming:
-            CountdownView(targetDate: viewModel.race.date, title: "Race starts in")
+            CountdownView(targetDate: viewModel.race.date, title: Strings.RaceDetail.raceStartsIn)
                 .padding(.horizontal)
+            predictionsSection
         case .live:
             GlassCard {
                 Label(Strings.RaceDetail.raceIsLive, systemImage: "play.fill")
@@ -197,6 +198,109 @@ struct RaceDetailView: View {
             .padding(.horizontal)
         case .completed:
             EmptyView()
+        }
+    }
+
+    @State private var aiPredictions: [DriverPrediction] = []
+    @State private var aiLoaded = false
+    @State private var aiLoading = false
+    @State private var aiError = false
+
+    @ViewBuilder
+    private var predictionsSection: some View {
+        Group {
+            if aiLoading {
+                loadingState
+            } else if !aiError, !aiPredictions.isEmpty {
+                PredictionCard(predictions: aiPredictions)
+            } else {
+                let fallback = F1DBPredictor(f1db: f1dbService).predictTop5(for: f1dbRace)
+                PredictionCard(predictions: fallback)
+            }
+        }
+        .task {
+            await loadPredictions()
+        }
+    }
+
+    @State private var brainPulse = false
+    @State private var sparkleIndex = 0
+    @State private var dotCount = 0
+    @State private var loadingTimer: Timer?
+
+    private var loadingState: some View {
+        GlassCard {
+            VStack(spacing: 16) {
+                ZStack {
+                    ForEach(0..<3, id: \.self) { i in
+                        Image(systemName: "brain.head.profile")
+                            .font(.system(size: 36))
+                            .foregroundColor(.f1Accent.opacity(0.15 - Double(i) * 0.04))
+                            .scaleEffect(brainPulse ? 1.0 + Double(i + 1) * 0.25 : 1.0)
+                            .opacity(brainPulse ? 0 : 0.4)
+                            .animation(
+                                .easeOut(duration: 1.2).repeatForever(autoreverses: false).delay(Double(i) * 0.35),
+                                value: brainPulse
+                            )
+                    }
+                    Image(systemName: "brain.head.profile")
+                        .font(.system(size: 36))
+                        .foregroundColor(.f1Accent)
+                        .scaleEffect(brainPulse ? 1.08 : 1.0)
+                        .animation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true), value: brainPulse)
+                }
+
+                Text("Analyzing with AI\(String(repeating: ".", count: dotCount % 4))")
+                    .font(F1Theme.subheadline)
+                    .foregroundColor(.f1TextSecondary)
+                    .id(dotCount)
+
+                HStack(spacing: 4) {
+                    ForEach(0..<5, id: \.self) { i in
+                        Capsule()
+                            .fill(sparkleIndex == i ? Color.f1Accent : Color.white.opacity(0.08))
+                            .frame(width: sparkleIndex == i ? 8 : 4, height: sparkleIndex == i ? 16 : 8)
+                            .animation(.spring(response: 0.3, dampingFraction: 0.6), value: sparkleIndex)
+                    }
+                }
+
+                Text("Running on local Llama 3.2")
+                    .font(.system(.caption2, design: .rounded))
+                    .foregroundColor(.f1TextSecondary.opacity(0.5))
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding(.horizontal)
+        .onAppear {
+            brainPulse = true
+            loadingTimer = Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { _ in
+                sparkleIndex = (sparkleIndex + 1) % 5
+                dotCount += 1
+            }
+        }
+        .onDisappear {
+            loadingTimer?.invalidate()
+            loadingTimer = nil
+        }
+    }
+
+    private func loadPredictions() async {
+        guard !aiLoaded else { return }
+        let configStore = AIConfigStore.shared
+        guard configStore.config.isConfigured else {
+            aiPredictions = F1DBPredictor(f1db: f1dbService).predictTop5(for: f1dbRace)
+            aiLoaded = true
+            return
+        }
+        aiLoading = true
+        do {
+            let service = AIPredictionService(config: configStore.config, f1db: f1dbService)
+            aiPredictions = try await service.predictTop5(for: f1dbRace)
+            aiLoading = false
+            aiLoaded = true
+        } catch {
+            aiLoading = false
+            aiError = true
         }
     }
 

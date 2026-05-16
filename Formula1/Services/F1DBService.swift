@@ -6,44 +6,54 @@ final class F1DBService: ObservableObject {
     @Published private(set) var isLoading = false
     @Published private(set) var error: Error?
 
-    private var root: F1DBRoot?
     private var driversByID: [String: F1DBDriver] = [:]
     private var constructorsByID: [String: F1DBConstructor] = [:]
     private var circuitsByID: [String: F1DBCircuit] = [:]
     private var grandsPrixByID: [String: F1DBGrandPrix] = [:]
-    private var racesByID: [Int: F1DBRace] = [:]
     private var countriesByID: [String: F1DBCountry] = [:]
     private var seasonsByYear: [Int: F1DBSeason] = [:]
     private var racesByYearAndRound: [Int: [Int: F1DBRace]] = [:]
+    private var racesByCircuitID: [String: [F1DBRace]] = [:]
 
     private let cacheURL: URL
-    private let jsonURL = URL(string: "https://github.com/f1db/f1db/releases/download/v2026.4.2/f1db-json-single.zip")!
 
     init() {
         let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         cacheURL = caches.appendingPathComponent("f1db-cache.json")
+        loadSynchronously()
     }
 
-    func load() async {
-        if let data = try? loadFromBundle() {
-            if parse(data) { return }
-        }
-        if let cached = try? loadFromCache() {
-            if parse(cached) { return }
-        }
-        await refresh()
-    }
-
-    func refresh() async {
+    private func loadSynchronously() {
         isLoading = true
-        error = nil
         defer { isLoading = false }
 
+        guard let url = Bundle.main.url(forResource: "f1db", withExtension: "json") else {
+            error = F1DBError.bundleNotFound
+            return
+        }
+
         do {
-            let data = try await downloadAndDecompress()
-            if parse(data) {
-                saveToCache(data)
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let root = try decoder.decode(F1DBRoot.self, from: data)
+
+            driversByID = Dictionary(uniqueKeysWithValues: root.drivers.map { ($0.id, $0) })
+            constructorsByID = Dictionary(uniqueKeysWithValues: root.constructors.map { ($0.id, $0) })
+            circuitsByID = Dictionary(uniqueKeysWithValues: root.circuits.map { ($0.id, $0) })
+            grandsPrixByID = Dictionary(uniqueKeysWithValues: root.grandsPrix.map { ($0.id, $0) })
+            countriesByID = Dictionary(uniqueKeysWithValues: root.countries.map { ($0.id, $0) })
+            seasonsByYear = Dictionary(uniqueKeysWithValues: root.seasons.map { ($0.year, $0) })
+
+            for race in root.races {
+                if racesByYearAndRound[race.year] == nil { racesByYearAndRound[race.year] = [:] }
+                racesByYearAndRound[race.year]?[race.round] = race
+
+                let cid = race.circuitId
+                if racesByCircuitID[cid] == nil { racesByCircuitID[cid] = [] }
+                racesByCircuitID[cid]?.append(race)
             }
+
+            isLoaded = true
         } catch {
             self.error = error
         }
@@ -57,7 +67,6 @@ final class F1DBService: ObservableObject {
     func grandPrix(id: String) -> F1DBGrandPrix? { grandsPrixByID[id] }
     func country(id: String) -> F1DBCountry? { countriesByID[id] }
     func season(year: Int) -> F1DBSeason? { seasonsByYear[year] }
-    func race(id: Int) -> F1DBRace? { racesByID[id] }
 
     func race(year: Int, round: Int) -> F1DBRace? {
         racesByYearAndRound[year]?[round]
@@ -67,6 +76,10 @@ final class F1DBService: ObservableObject {
         racesByYearAndRound[year]?.values.sorted { $0.round < $1.round } ?? []
     }
 
+    func racesAtCircuit(circuitId: String) -> [F1DBRace] {
+        racesByCircuitID[circuitId]?.sorted { $0.year > $1.year } ?? []
+    }
+
     func allDrivers() -> [F1DBDriver] { Array(driversByID.values) }
     func allConstructors() -> [F1DBConstructor] { Array(constructorsByID.values) }
 
@@ -74,95 +87,80 @@ final class F1DBService: ObservableObject {
         countriesByID[id]?.name ?? id
     }
 
-    // MARK: - Private
+    // MARK: - Circuit Performance
 
-    private func parse(_ data: Data) -> Bool {
-        let decoder = JSONDecoder()
-        do {
-            let root = try decoder.decode(F1DBRoot.self, from: data)
-            self.root = root
-            buildIndexes()
-            isLoaded = true
-            return true
-        } catch {
-            self.error = error
-            return false
-        }
-    }
-
-    private func buildIndexes() {
-        guard let root else { return }
-        driversByID = Dictionary(uniqueKeysWithValues: root.drivers.map { ($0.id, $0) })
-        constructorsByID = Dictionary(uniqueKeysWithValues: root.constructors.map { ($0.id, $0) })
-        circuitsByID = Dictionary(uniqueKeysWithValues: root.circuits.map { ($0.id, $0) })
-        grandsPrixByID = Dictionary(uniqueKeysWithValues: root.grandsPrix.map { ($0.id, $0) })
-        countriesByID = Dictionary(uniqueKeysWithValues: root.countries.map { ($0.id, $0) })
-        seasonsByYear = Dictionary(uniqueKeysWithValues: root.seasons.map { ($0.year, $0) })
-        for race in root.races {
-            racesByID[race.id] = race
-            if racesByYearAndRound[race.year] == nil { racesByYearAndRound[race.year] = [:] }
-            racesByYearAndRound[race.year]?[race.round] = race
-        }
-    }
-
-    private func loadFromBundle() throws -> Data? {
-        guard let url = Bundle.main.url(forResource: "f1db", withExtension: "json") else { return nil }
-        return try Data(contentsOf: url)
-    }
-
-    private func loadFromCache() throws -> Data? {
-        guard FileManager.default.fileExists(atPath: cacheURL.path) else { return nil }
-        return try Data(contentsOf: cacheURL)
-    }
-
-    private func saveToCache(_ data: Data) {
-        try? data.write(to: cacheURL, options: .atomic)
-    }
-
-    private func downloadAndDecompress() async throws -> Data {
-        let session = URLSession.shared
-        let (zipData, _) = try await session.data(from: jsonURL)
-        #if os(macOS)
-        return try decompressZipMacOS(zipData)
-        #else
-        throw F1DBError.decompressionNotAvailable
-        #endif
-    }
-
-    #if os(macOS)
-    private func decompressZipMacOS(_ zipData: Data) throws -> Data {
-        let tempDir = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
-        try FileManager.default.createDirectory(at: tempDir, withIntermediateDirectories: true)
-        defer { try? FileManager.default.removeItem(at: tempDir) }
-
-        let zipPath = tempDir.appendingPathComponent("data.zip")
-        try zipData.write(to: zipPath)
-
-        let process = Process()
-        process.executableURL = URL(fileURLWithPath: "/usr/bin/unzip")
-        process.arguments = ["-o", zipPath.path, "-d", tempDir.path]
-        try process.run()
-        process.waitUntilExit()
-
-        var jsonFile = tempDir.appendingPathComponent("f1db.json")
-        if !FileManager.default.fileExists(atPath: jsonFile.path) {
-            let contents = try FileManager.default.contentsOfDirectory(at: tempDir, includingPropertiesForKeys: nil)
-            if let subdir = contents.first(where: { $0.hasDirectoryPath }) {
-                jsonFile = subdir.appendingPathComponent("f1db.json")
+    func averageFinishForDriver(driverId: String, circuitId: String, maxRaces: Int = 5) -> Double? {
+        let circuitRaces = racesAtCircuit(circuitId: circuitId).prefix(maxRaces)
+        var finishes: [Int] = []
+        for race in circuitRaces {
+            if let results = race.raceResults,
+               let result = results.first(where: { $0.driverId == driverId }),
+               let pos = result.positionNumber {
+                finishes.append(pos)
             }
         }
-        return try Data(contentsOf: jsonFile)
+        guard !finishes.isEmpty else { return nil }
+        return Double(finishes.reduce(0, +)) / Double(finishes.count)
     }
-    #endif
+
+    func averageFinishForConstructor(constructorId: String, circuitId: String, maxRaces: Int = 5) -> Double? {
+        let circuitRaces = racesAtCircuit(circuitId: circuitId).prefix(maxRaces)
+        var finishes: [Int] = []
+        for race in circuitRaces {
+            if let results = race.raceResults {
+                let constructorResults = results.filter { $0.constructorId == constructorId }
+                let positions = constructorResults.compactMap { $0.positionNumber }
+                if !positions.isEmpty {
+                    finishes.append(positions.min() ?? positions.reduce(0, +) / positions.count)
+                }
+            }
+        }
+        guard !finishes.isEmpty else { return nil }
+        return Double(finishes.reduce(0, +)) / Double(finishes.count)
+    }
+
+    func driverResultsLastRaces(driverId: String, circuitId: String? = nil, limit: Int = 8) -> [(position: Int, year: Int, round: Int)] {
+        var results: [(Int, Int, Int)] = []
+        for year in (2020...2026).reversed() {
+            guard let yearRaces = racesByYearAndRound[year] else { continue }
+            for round in yearRaces.keys.sorted().reversed() {
+                guard results.count < limit else { break }
+                guard let race = yearRaces[round] else { continue }
+                if let circuitId, race.circuitId != circuitId { continue }
+                if let raceResults = race.raceResults,
+                   let result = raceResults.first(where: { $0.driverId == driverId }),
+                   let pos = result.positionNumber {
+                    results.append((pos, year, round))
+                }
+            }
+            if results.count >= limit { break }
+        }
+        return results.map { ($0.0, $0.1, $0.2) }
+    }
+
+    func qualifyingPerformanceAtCircuit(driverId: String, circuitId: String, maxRaces: Int = 3) -> Double? {
+        let circuitRaces = racesAtCircuit(circuitId: circuitId).prefix(maxRaces)
+        var positions: [Int] = []
+        for race in circuitRaces {
+            if let quali = race.qualifyingResults,
+               let result = quali.first(where: { $0.driverId == driverId }),
+               let pos = result.positionNumber {
+                positions.append(pos)
+            }
+        }
+        guard !positions.isEmpty else { return nil }
+        return Double(positions.reduce(0, +)) / Double(positions.count)
+    }
 }
 
 enum F1DBError: LocalizedError {
-    case decompressionNotAvailable
+    case bundleNotFound
 
     var errorDescription: String? {
         switch self {
-        case .decompressionNotAvailable:
-            return "F1DB data needs to be bundled. Add f1db.json to app Resources."
+        case .bundleNotFound:
+            return "f1db.json not found in app bundle."
         }
     }
 }
+

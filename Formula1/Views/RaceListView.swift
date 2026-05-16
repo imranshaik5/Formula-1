@@ -38,7 +38,7 @@ struct RaceListView: View {
                 .foregroundColor(.f1TextSecondary)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(carbonBackground)
+        .background(Color.f1BackgroundDeep)
     }
 
     private func errorView(_ error: Error) -> some View {
@@ -48,12 +48,12 @@ struct RaceListView: View {
             description: Text(error.localizedDescription)
         )
         .foregroundColor(.f1Accent)
-        .background(carbonBackground)
+        .background(Color.f1BackgroundDeep)
     }
 
     private var raceList: some View {
         ZStack {
-            carbonBackground
+            backgroundGradient
             ScrollView {
                 LazyVStack(spacing: 16) {
                     Color.clear
@@ -87,17 +87,28 @@ struct RaceListView: View {
         .navigationBarTitleDisplayMode(.large)
     }
 
+    private var backgroundGradient: some View {
+        LinearGradient(
+            colors: [
+                .f1Accent.opacity(0.04),
+                .clear,
+                Color.f1BackgroundDeep,
+            ],
+            startPoint: .top,
+            endPoint: .bottom
+        )
+        .ignoresSafeArea()
+    }
+
     // MARK: - Hero Card
 
     private func heroCard(_ race: Race) -> some View {
         VStack(spacing: 0) {
             ZStack {
                 CircuitTrackView(svgURL: F1Media.circuitSVGURL(circuitName: race.circuit.name))
-                    .opacity(0.45)
+                    .opacity(0.3)
 
-                heroMotionStreaks
-
-                Color.f1Card.opacity(0.85)
+                glassOverlay
 
                 VStack(spacing: 14) {
                     Text(Strings.RaceList.upNext)
@@ -107,6 +118,10 @@ struct RaceListView: View {
                         .padding(.horizontal, 12)
                         .padding(.vertical, 4)
                         .background(Capsule().fill(.ultraThinMaterial))
+                        .overlay(
+                            Capsule()
+                                .stroke(Color.white.opacity(0.1), lineWidth: 1)
+                        )
 
                     Text(race.name.uppercased())
                         .font(.system(size: 22, weight: .bold, design: .default))
@@ -130,7 +145,6 @@ struct RaceListView: View {
                 .padding(16)
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
-                .background(Color.f1Card.opacity(0.2))
         }
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -148,28 +162,10 @@ struct RaceListView: View {
         .padding(.horizontal, 16)
     }
 
-    @State private var streakTime: Date = .now
-    private let streakTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
-
-    private var heroMotionStreaks: some View {
-        Canvas { context, size in
-            let time = streakTime.timeIntervalSinceReferenceDate
-            for i in 0..<10 {
-                let phase = Double(i) * 0.4
-                let speed: Double = 50 + Double(i) * 8
-                let totalWidth = size.width + 200
-                let x = CGFloat((time * speed + phase * 60).truncatingRemainder(dividingBy: Double(totalWidth))) - 100
-                let y = (size.height / 10) * CGFloat(i)
-                let len: CGFloat = 60 + CGFloat(i) * 15
-                let alpha = 0.04 + (sin(time * 0.3 + phase) * 0.025)
-
-                var path = Path()
-                path.move(to: CGPoint(x: x, y: y))
-                path.addLine(to: CGPoint(x: x + len, y: y))
-                context.stroke(path, with: .color(.white.opacity(alpha)), lineWidth: 1.5)
-            }
-        }
-        .onReceive(streakTimer) { _ in streakTime = .now }
+    private var glassOverlay: some View {
+        Rectangle()
+            .fill(.ultraThinMaterial)
+            .opacity(0.6)
     }
 
     // MARK: - Race Card
@@ -206,7 +202,13 @@ struct RaceListView: View {
                 .opacity(0.18)
         }
         .background(.ultraThinMaterial)
-        .background(Color.f1Card.opacity(0.25))
+        .background(
+            LinearGradient(
+                colors: [.f1Accent.opacity(0.03), .clear],
+                startPoint: .leading,
+                endPoint: .trailing
+            )
+        )
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
@@ -249,29 +251,6 @@ struct RaceListView: View {
             Label(Strings.RaceList.upcoming, systemImage: "clock")
                 .font(.system(size: 11, weight: .medium, design: .default))
                 .foregroundColor(.white.opacity(0.4))
-        }
-    }
-
-    // MARK: - Carbon Fiber Background
-
-    @State private var carbonOffset: CGFloat = 0
-    private let carbonTimer = Timer.publish(every: 0.05, on: .main, in: .common).autoconnect()
-
-    private var carbonBackground: some View {
-        Canvas { context, size in
-            for i in stride(from: -40, to: Int(size.width + size.height) + 40, by: 6) {
-                let x = CGFloat(i) - carbonOffset
-                let y = CGFloat(i) * 0.5
-                var path = Path()
-                path.move(to: CGPoint(x: x, y: y - size.height))
-                path.addLine(to: CGPoint(x: x + size.height, y: y + size.height))
-                context.stroke(path, with: .color(.white.opacity(0.012)), lineWidth: 1)
-            }
-        }
-        .background(Color.f1BackgroundDeep)
-        .ignoresSafeArea()
-        .onReceive(carbonTimer) { _ in
-            withAnimation(.linear(duration: 0.05)) { carbonOffset += 0.1 }
         }
     }
 

@@ -192,7 +192,8 @@ struct SplashScreenView: View {
         withAnimation(.easeOut(duration: 0.6).delay(1.0)) {
             showTagline = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + autoDismissDelay) {
+        Task {
+            try? await Task.sleep(for: .seconds(autoDismissDelay))
             dismiss()
         }
     }
@@ -202,7 +203,8 @@ struct SplashScreenView: View {
         withAnimation(.easeOut(duration: 0.35)) {
             isDismissing = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+        Task {
+            try? await Task.sleep(for: .seconds(0.35))
             onComplete()
         }
     }
