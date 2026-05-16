@@ -48,7 +48,7 @@ struct SplashScreenView: View {
 
     private var backgroundView: some View {
         ZStack {
-            Color(hex: "050508")
+            Color.f1BackgroundDeep
 
             LinearGradient(
                 colors: [
@@ -61,7 +61,7 @@ struct SplashScreenView: View {
             )
 
             RadialGradient(
-                colors: [Color(hex: "FF4400").opacity(0.08), .clear],
+                colors: [.f1OrangeAccent.opacity(0.08), .clear],
                 center: .init(x: 0.5, y: 0.7),
                 startRadius: 30,
                 endRadius: 350
@@ -102,7 +102,7 @@ struct SplashScreenView: View {
 
                     let useWarm = i % 3 == 0
                     let color: Color = useWarm
-                        ? Color(hex: "FF6633").opacity(alpha)
+                        ? .f1OrangeLight.opacity(alpha)
                         : Color.white.opacity(alpha * 0.8)
 
                     var path = Path()
@@ -137,7 +137,7 @@ struct SplashScreenView: View {
         ZStack(alignment: .trailing) {
             // Ground reflection glow
             LinearGradient(
-                colors: [Color(hex: "FF4400").opacity(0.12), .clear],
+                colors: [.f1OrangeAccent.opacity(0.12), .clear],
                 startPoint: .bottom, endPoint: .top
             )
             .frame(height: 60)
@@ -154,7 +154,7 @@ struct SplashScreenView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 340)
-                .shadow(color: Color(hex: "FF4400").opacity(0.15), radius: 30, x: 0, y: 10)
+                .shadow(color: .f1OrangeAccent.opacity(0.15), radius: 30, x: 0, y: 10)
 
             // Sparks at rear
             SparksView()
@@ -230,9 +230,9 @@ struct SparksView: View {
                     let alpha = 1.0 - progress
                     let radius: CGFloat = 1.0 + CGFloat(1.0 - progress) * 2.5
 
-                    let color = progress < 0.3
-                        ? Color(hex: "FFCC00")
-                        : Color(hex: "FF6633")
+                    let color: Color = progress < 0.3
+                        ? .f1GoldLight
+                        : .f1OrangeLight
 
                     let rect = CGRect(
                         x: x - radius, y: y - radius,

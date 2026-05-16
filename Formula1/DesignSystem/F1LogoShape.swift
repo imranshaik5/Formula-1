@@ -203,7 +203,7 @@ struct F1LogoShape: Shape {
 
 #Preview {
     F1LogoShape()
-        .fill(Color(hex: "E10600"), style: FillStyle(eoFill: true))
+        .fill(Color.f1Accent, style: FillStyle(eoFill: true))
         .aspectRatio(contentMode: .fit)
         .frame(width: 320, height: 80)
         .padding()

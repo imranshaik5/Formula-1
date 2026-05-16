@@ -48,7 +48,7 @@ struct RaceDetailView: View {
                 .padding(.bottom, 24)
             }
         }
-        .background(Color(hex: "050505").ignoresSafeArea())
+        .background(Color.f1BackgroundDarker.ignoresSafeArea())
         .navigationTitle(viewModel.race.name)
         .navigationBarTitleDisplayMode(.inline)
         .task {
@@ -57,7 +57,7 @@ struct RaceDetailView: View {
         }
         .overlay {
             if viewModel.isLoading {
-                Color(hex: "050505").opacity(0.6).ignoresSafeArea()
+                Color.f1BackgroundDarker.opacity(0.6).ignoresSafeArea()
                 ProgressView().tint(.f1Accent).scaleEffect(1.5)
             }
         }
@@ -108,6 +108,7 @@ struct RaceDetailView: View {
         sectionDivider("RACE DETAILS")
         raceDetailsSection(result)
             .padding(.horizontal)
+        }
 
         if let gp = f1dbRace.flatMap({ f1dbService.grandPrix(id: $0.grandPrixId) }) {
             sectionDivider("GRAND PRIX")
@@ -174,7 +175,7 @@ struct RaceDetailView: View {
             .opacity(0.25)
 
             LinearGradient(
-                colors: [.clear, Color(hex: "050505")],
+                colors: [.clear, .f1BackgroundDarker],
                 startPoint: .top,
                 endPoint: .bottom
             )
@@ -287,7 +288,7 @@ struct RaceDetailView: View {
         }
         .padding(16)
         .background(.ultraThinMaterial)
-        .background(Color(hex: "1A1A2E").opacity(0.3))
+        .background(Color.f1Card.opacity(0.3))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
@@ -332,7 +333,7 @@ struct RaceDetailView: View {
                 VStack(alignment: .trailing, spacing: 2) {
                     Text(fl.time)
                         .font(.system(size: 14, weight: .bold, design: .monospaced))
-                        .foregroundColor(Color(hex: "B026FF"))
+                        .foregroundColor(.f1PurpleAccent)
 
                     Text("\(fl.speed) kph")
                         .font(.system(size: 10, weight: .regular, design: .monospaced))
@@ -452,7 +453,7 @@ struct RaceDetailView: View {
     private func gridDeltaCell(_ entry: RaceStatus.RaceResultEntry) -> some View {
         let diff = entry.driver.position - entry.grid
         let text: String = diff == 0 ? "–" : diff < 0 ? "\(diff)" : "+\(diff)"
-        let color: Color = diff < 0 ? Color(hex: "39FF14") : diff > 0 ? .f1Accent : .white.opacity(0.3)
+        let color: Color = diff < 0 ? .f1NeonGreen : diff > 0 ? .f1Accent : .white.opacity(0.3)
         return Text(text)
             .font(.system(size: 11, weight: .bold, design: .monospaced))
             .foregroundColor(color)

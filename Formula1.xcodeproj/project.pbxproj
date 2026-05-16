@@ -67,6 +67,8 @@
 		B8863F1171CB0611B5E00903 /* F1DBRaceSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2961AD3C29E345CB4812E /* F1DBRaceSections.swift */; };
 		D6E6A5976194A13C02AE2BD0 /* VideoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C7D0EA292A3486F7FDCAD9 /* VideoItem.swift */; };
 		EAB20F4164E616DB1E646F45 /* YouTubeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A8326658B316E7B1829E12 /* YouTubeService.swift */; };
+		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8029 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E7025 /* SideMenu.swift */; };
+		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8032 /* f1db.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E8031 /* f1db.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -127,11 +129,13 @@
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E7022 /* NewsServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsServiceProtocol.swift; sourceTree = "<group>"; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E7023 /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E7024 /* CircuitTrackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircuitTrackView.swift; sourceTree = "<group>"; };
+		5A0D1B6A2F1D4F1A8E1A2B3C4D5E7025 /* SideMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenu.swift; sourceTree = "<group>"; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8025 /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = video.mp4; path = demo.mp4; sourceTree = "<group>"; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8027 /* ConstructorDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructorDetailViewModel.swift; sourceTree = "<group>"; };
 		6FA90A8572823E4E34014010 /* F1DBService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBService.swift; sourceTree = "<group>"; };
 		9A2DABF96439E66F9759928D /* F1DBConstructorSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBConstructorSections.swift; sourceTree = "<group>"; };
 		CFD2961AD3C29E345CB4812E /* F1DBRaceSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBRaceSections.swift; sourceTree = "<group>"; };
+		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8031 /* f1db.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = f1db.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +281,7 @@
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6FA7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8031 /* f1db.json */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8025 /* demo.mp4 */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F88 /* Assets.xcassets */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F8A /* Info.plist */,
@@ -308,6 +313,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7007 /* CountdownView.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7008 /* DriverPhotoView.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7024 /* CircuitTrackView.swift */,
+				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7025 /* SideMenu.swift */,
 				11A3DF8628B40E3762695FFD /* F1DBDriverSections.swift */,
 				9A2DABF96439E66F9759928D /* F1DBConstructorSections.swift */,
 				CFD2961AD3C29E345CB4812E /* F1DBRaceSections.swift */,
@@ -407,6 +413,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8017 /* LaunchScreen.storyboard in Resources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8019 /* Localizable.strings in Resources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8026 /* demo.mp4 in Resources */,
+				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8032 /* f1db.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +470,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8022 /* NewsServiceProtocol.swift in Sources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8023 /* NewsService.swift in Sources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8024 /* CircuitTrackView.swift in Sources */,
+				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8029 /* SideMenu.swift in Sources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8028 /* ConstructorDetailViewModel.swift in Sources */,
 				D6E6A5976194A13C02AE2BD0 /* VideoItem.swift in Sources */,
 				EAB20F4164E616DB1E646F45 /* YouTubeService.swift in Sources */,

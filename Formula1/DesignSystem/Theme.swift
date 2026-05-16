@@ -31,6 +31,15 @@ enum F1Theme {
     static let silver = Color(hex: "C0C0C0")
     static let bronze = Color(hex: "CD7F32")
 
+    static let backgroundDeep = Color(hex: "050508")
+    static let backgroundDarker = Color(hex: "050505")
+    static let neonGreen = Color(hex: "39FF14")
+    static let textMuted = Color(hex: "5A5A64")
+    static let purpleAccent = Color(hex: "B026FF")
+    static let orangeAccent = Color(hex: "FF4400")
+    static let orangeLight = Color(hex: "FF6633")
+    static let goldLight = Color(hex: "FFCC00")
+
     static let largeTitle = Font.system(.largeTitle, design: .rounded).weight(.bold)
     static let title = Font.system(.title, design: .rounded).weight(.bold)
     static let headline = Font.system(.headline, design: .rounded).weight(.semibold)

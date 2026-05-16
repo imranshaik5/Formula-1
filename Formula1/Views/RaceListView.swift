@@ -95,7 +95,7 @@ struct RaceListView: View {
 
                 heroMotionStreaks
 
-                Color(hex: "1A1A2E").opacity(0.85)
+                Color.f1Card.opacity(0.85)
 
                 VStack(spacing: 14) {
                     Text(Strings.RaceList.upNext)
@@ -128,7 +128,7 @@ struct RaceListView: View {
                 .padding(16)
                 .frame(maxWidth: .infinity)
                 .background(.ultraThinMaterial)
-                .background(Color(hex: "1A1A2E").opacity(0.2))
+                .background(Color.f1Card.opacity(0.2))
         }
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 20))
@@ -142,7 +142,7 @@ struct RaceListView: View {
                     lineWidth: 1
                 )
         )
-        .shadow(color: Color(hex: "E10600").opacity(0.12), radius: 24, x: 0, y: 10)
+        .shadow(color: .f1Accent.opacity(0.12), radius: 24, x: 0, y: 10)
         .padding(.horizontal, 16)
     }
 
@@ -204,7 +204,7 @@ struct RaceListView: View {
                 .opacity(0.18)
         }
         .background(.ultraThinMaterial)
-        .background(Color(hex: "1A1A2E").opacity(0.25))
+        .background(Color.f1Card.opacity(0.25))
         .clipShape(RoundedRectangle(cornerRadius: 16))
         .overlay(
             RoundedRectangle(cornerRadius: 16)
@@ -231,8 +231,8 @@ struct RaceListView: View {
         case .completed:
             Label(Strings.RaceList.completed, systemImage: "checkmark.circle.fill")
                 .font(.system(size: 11, weight: .semibold, design: .default))
-                .foregroundColor(Color(hex: "39FF14"))
-                .shadow(color: Color(hex: "39FF14").opacity(0.5), radius: 6, x: 0, y: 0)
+                .foregroundColor(.f1NeonGreen)
+                .shadow(color: .f1NeonGreen.opacity(0.5), radius: 6, x: 0, y: 0)
         case .live:
             HStack(spacing: 4) {
                 Circle()
@@ -266,7 +266,7 @@ struct RaceListView: View {
                 context.stroke(path, with: .color(.white.opacity(0.012)), lineWidth: 1)
             }
         }
-        .background(Color(hex: "050508"))
+        .background(Color.f1BackgroundDeep)
         .ignoresSafeArea()
         .onReceive(carbonTimer) { _ in
             withAnimation(.linear(duration: 0.05)) { carbonOffset += 0.1 }

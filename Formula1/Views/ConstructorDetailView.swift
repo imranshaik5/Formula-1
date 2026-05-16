@@ -245,9 +245,9 @@ struct ConstructorDetailView: View {
 
     private func positionColor(_ position: Int) -> Color {
         switch position {
-        case 1: return Color(hex: "FFD700")
-        case 2: return Color(hex: "C0C0C0")
-        case 3: return Color(hex: "CD7F32")
+        case 1: return F1Theme.gold
+        case 2: return F1Theme.silver
+        case 3: return F1Theme.bronze
         default: return .f1TextSecondary
         }
     }

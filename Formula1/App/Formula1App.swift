@@ -4,6 +4,8 @@ import SwiftUI
 struct Formula1App: App {
     @StateObject private var coordinator = AppCoordinator()
     @State private var showSplash = true
+    @State private var menuOpen = false
+    @State private var selectedTab: SideMenuTab = .races
 
     var body: some Scene {
         WindowGroup {
@@ -15,45 +17,49 @@ struct Formula1App: App {
                 }
                 .transition(.opacity)
             } else {
-                NavigationStack(path: $coordinator.navigationPath) {
-                    TabView {
-                        coordinator.makeRaceListView()
-                            .tabItem {
-                                Label("Races", systemImage: "flag.checkered")
-                            }
-                            .toolbarBackground(.visible, for: .tabBar)
-                            .toolbarBackground(F1Theme.cardBackground, for: .tabBar)
-
-                        coordinator.makeDriverListView()
-                            .tabItem {
-                                Label("Drivers", systemImage: "person.3.fill")
-                            }
-                            .toolbarBackground(.visible, for: .tabBar)
-                            .toolbarBackground(F1Theme.cardBackground, for: .tabBar)
-
-                        coordinator.makeConstructorStandingsView()
-                            .tabItem {
-                                Label("Constructors", systemImage: "wrench.and.screwdriver.fill")
-                            }
-                            .toolbarBackground(.visible, for: .tabBar)
-                            .toolbarBackground(F1Theme.cardBackground, for: .tabBar)
-
-                        coordinator.makeNewsListView()
-                            .tabItem {
-                                Label("News", systemImage: "newspaper.fill")
-                            }
-                            .toolbarBackground(.visible, for: .tabBar)
-                            .toolbarBackground(F1Theme.cardBackground, for: .tabBar)
-                    }
-                    .tint(.f1Accent)
-                    .navigationDestination(for: AppRoute.self) { route in
-                        coordinator.view(for: route)
-                    }
+                ZStack {
+                    mainContent
+                    SideMenu(isOpen: $menuOpen, selectedTab: $selectedTab)
                 }
                 .environmentObject(coordinator)
                 .preferredColorScheme(.dark)
                 .transition(.opacity)
             }
         }
+    }
+
+    @ViewBuilder
+    private var mainContent: some View {
+        NavigationStack(path: $coordinator.navigationPath) {
+            Group {
+                switch selectedTab {
+                case .races:
+                    coordinator.makeRaceListView()
+                case .drivers:
+                    coordinator.makeDriverListView()
+                case .constructors:
+                    coordinator.makeConstructorStandingsView()
+                case .news:
+                    coordinator.makeNewsListView()
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.85)) {
+                            menuOpen.toggle()
+                        }
+                    } label: {
+                        Image(systemName: "line.3.horizontal")
+                            .font(.system(size: 20, weight: .semibold))
+                            .foregroundColor(.white)
+                    }
+                }
+            }
+            .navigationDestination(for: AppRoute.self) { route in
+                coordinator.view(for: route)
+            }
+        }
+        .tint(.f1Accent)
     }
 }

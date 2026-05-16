@@ -7,3 +7,6 @@ build/
 *.dSYM.zip
 *.dSYM
 Pods/
+
+# F1DB historical data (80MB JSON, downloaded separately)
+Formula1/Resources/f1db.json

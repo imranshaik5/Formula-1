@@ -59,4 +59,12 @@ extension Color {
     static let f1CardSecondary = F1Theme.cardBackgroundSecondary
     static let f1TextSecondary = F1Theme.textSecondary
     static let f1Accent = F1Theme.accentRed
+    static let f1BackgroundDeep = F1Theme.backgroundDeep
+    static let f1BackgroundDarker = F1Theme.backgroundDarker
+    static let f1NeonGreen = F1Theme.neonGreen
+    static let f1TextMuted = F1Theme.textMuted
+    static let f1PurpleAccent = F1Theme.purpleAccent
+    static let f1OrangeAccent = F1Theme.orangeAccent
+    static let f1OrangeLight = F1Theme.orangeLight
+    static let f1GoldLight = F1Theme.goldLight
 }

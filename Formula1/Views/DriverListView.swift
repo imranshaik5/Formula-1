@@ -100,7 +100,7 @@ struct DriverListView: View {
         return ZStack {
             RoundedRectangle(cornerRadius: F1Theme.cornerRadius)
                 .fill(.ultraThinMaterial)
-                .background(Color(hex: "1A1A2E").opacity(0.2))
+                .background(Color.f1Card.opacity(0.2))
 
             RoundedRectangle(cornerRadius: F1Theme.cornerRadius)
                 .stroke(
@@ -204,7 +204,7 @@ struct DriverListView: View {
                 context.stroke(path, with: .color(.white.opacity(0.012)), lineWidth: 1)
             }
         }
-        .background(Color(hex: "050508"))
+        .background(Color.f1BackgroundDeep)
         .ignoresSafeArea()
         .onReceive(carbonTimer) { _ in
             withAnimation(.linear(duration: 0.05)) { carbonOffset += 0.1 }
