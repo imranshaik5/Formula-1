@@ -2,9 +2,7 @@ import Foundation
 
 @MainActor
 final class DriverListViewModel: ObservableObject {
-    @Published private(set) var drivers: [Driver] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var state: LoadState<[Driver]> = .idle
 
     private let driverService: DriverServiceProtocol
 
@@ -13,13 +11,12 @@ final class DriverListViewModel: ObservableObject {
     }
 
     func loadDrivers() async {
-        isLoading = true
-        error = nil
+        state = .loading
         do {
-            drivers = try await driverService.fetchDrivers()
+            let drivers = try await driverService.fetchDrivers()
+            state = .loaded(drivers)
         } catch {
-            self.error = error
+            state = .error(error)
         }
-        isLoading = false
     }
 }

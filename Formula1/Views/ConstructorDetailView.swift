@@ -3,7 +3,7 @@ import Kingfisher
 
 struct ConstructorDetailView: View {
     @StateObject private var viewModel: ConstructorDetailViewModel
-    @StateObject private var f1dbService = F1DBService.shared
+    @EnvironmentObject private var f1dbService: F1DBService
 
     private var f1dbConstructor: F1DBConstructor? {
         let f1dbID = viewModel.standing.constructor.id.replacingOccurrences(of: "_", with: "-")
@@ -44,7 +44,6 @@ struct ConstructorDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadResults()
-            if !f1dbService.isLoaded { await f1dbService.load() }
         }
     }
 
@@ -74,7 +73,7 @@ struct ConstructorDetailView: View {
                 .foregroundColor(.white)
 
             HStack(spacing: 8) {
-                Text("P\(viewModel.position) in standings")
+                Text(Strings.ConstructorDetail.position(viewModel.position))
                     .font(F1Theme.subheadline)
                     .foregroundColor(.f1TextSecondary)
 
@@ -92,21 +91,21 @@ struct ConstructorDetailView: View {
     private var statsSection: some View {
         GlassCard {
             VStack(spacing: 16) {
-                Text("Season Statistics")
+                Text(Strings.Common.seasonStats)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack(spacing: 0) {
-                    statItem(label: "Position", value: "\(viewModel.position)", icon: "number")
+                    statItem(label: Strings.Common.position, value: "\(viewModel.position)", icon: "number")
                     Spacer()
-                    statItem(label: "Points", value: "\(viewModel.totalPoints)", icon: "star.fill")
+                    statItem(label: Strings.Common.points, value: "\(viewModel.totalPoints)", icon: "star.fill")
                     Spacer()
-                    statItem(label: "Wins", value: "\(viewModel.wins)", icon: "trophy.fill")
+                    statItem(label: Strings.Common.wins, value: "\(viewModel.wins)", icon: "trophy.fill")
                 }
 
                 VStack(alignment: .leading, spacing: 4) {
-                    Text("Points Progress")
+                    Text(Strings.Common.pointsProgress)
                         .font(F1Theme.caption)
                         .foregroundColor(.f1TextSecondary)
 
@@ -124,7 +123,7 @@ struct ConstructorDetailView: View {
     private var driverContributionsSection: some View {
         GlassCard {
             VStack(spacing: 12) {
-                Text("Driver Contributions")
+                Text(Strings.ConstructorDetail.driverContributions)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -167,17 +166,17 @@ struct ConstructorDetailView: View {
     private var raceResultsSection: some View {
         GlassCard {
             VStack(spacing: 12) {
-                Text("Race Results")
+                Text(Strings.Common.raceResults)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                if viewModel.isLoading {
+                if viewModel.state.isLoading {
                     ProgressView()
                         .tint(.f1TextSecondary)
                         .padding(.vertical, 20)
                 } else if viewModel.raceResults.isEmpty {
-                    Text("No race data available")
+                    Text(Strings.ConstructorDetail.noRaceData)
                         .font(F1Theme.subheadline)
                         .foregroundColor(.f1TextSecondary)
                         .padding(.vertical, 20)
@@ -195,7 +194,7 @@ struct ConstructorDetailView: View {
     private func raceResultRow(_ race: ConstructorRaceResult) -> some View {
         VStack(spacing: 8) {
             HStack {
-                Text("R\(race.round)")
+                Text(Strings.DriverDetail.round(race.round))
                     .font(.system(.caption, design: .monospaced))
                     .foregroundColor(.f1TextSecondary)
                     .frame(width: 32, alignment: .leading)
@@ -215,7 +214,7 @@ struct ConstructorDetailView: View {
 
             ForEach(race.driverResults, id: \.driverId) { result in
                 HStack(spacing: 8) {
-                    Text("P\(result.position)")
+                    Text(Strings.DriverDetail.positionP(result.position))
                         .font(.system(.caption, design: .monospaced))
                         .foregroundColor(positionColor(result.position))
                         .frame(width: 28)
@@ -272,5 +271,16 @@ struct ConstructorDetailView: View {
             return String(words.first!.prefix(3)).uppercased()
         }
         return words.compactMap { $0.first }.map { String($0) }.joined().uppercased().prefix(3).description
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            ConstructorDetailView(
+                standing: PreviewData.constructorStanding,
+                constructorService: ConstructorService()
+            )
+        }
     }
 }

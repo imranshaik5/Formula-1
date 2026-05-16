@@ -2,9 +2,7 @@ import Foundation
 
 @MainActor
 final class NewsViewModel: ObservableObject {
-    @Published private(set) var articles: [NewsArticle] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var state: LoadState<[NewsArticle]> = .idle
 
     private let newsService: NewsServiceProtocol
 
@@ -13,13 +11,12 @@ final class NewsViewModel: ObservableObject {
     }
 
     func loadArticles() async {
-        isLoading = true
-        error = nil
+        state = .loading
         do {
-            articles = try await newsService.fetchArticles()
+            let articles = try await newsService.fetchArticles()
+            state = .loaded(articles)
         } catch {
-            self.error = error
+            state = .error(error)
         }
-        isLoading = false
     }
 }

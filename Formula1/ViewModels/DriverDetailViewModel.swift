@@ -5,8 +5,7 @@ final class DriverDetailViewModel: ObservableObject {
     @Published private(set) var driver: Driver
     @Published private(set) var careerResults: [RaceStatus.RaceResultEntry] = []
     @Published private(set) var videoResults: [String: [VideoItem]] = [:]
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var loadState: LoadState<Void> = .idle
 
     private let driverService: DriverServiceProtocol
     private let youtubeService: YouTubeService
@@ -37,8 +36,7 @@ final class DriverDetailViewModel: ObservableObject {
     }
 
     func loadDriverDetails() async {
-        isLoading = true
-        error = nil
+        loadState = .loading
         do {
             async let updated = driverService.fetchDriver(by: driver.id)
             async let results = driverService.fetchDriverResults(driverId: driver.id)
@@ -47,10 +45,10 @@ final class DriverDetailViewModel: ObservableObject {
             }
             careerResults = try await results
             await loadVideoThumbnails()
+            loadState = .loaded(())
         } catch {
-            self.error = error
+            loadState = .error(error)
         }
-        isLoading = false
     }
 
     private func loadVideoThumbnails() async {

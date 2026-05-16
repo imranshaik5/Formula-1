@@ -124,7 +124,7 @@ struct SplashScreenView: View {
                 .frame(width: 100, height: 100)
                 .shadow(color: .white.opacity(0.1), radius: 8, x: 0, y: 2)
 
-            Text("FORMULA 1")
+            Text(Strings.Splash.formula1)
                 .font(.system(size: 14, weight: .semibold, design: .default))
                 .foregroundColor(.white.opacity(0.85))
                 .tracking(6.5)
@@ -167,12 +167,12 @@ struct SplashScreenView: View {
 
     private var taglineSection: some View {
         VStack(spacing: 6) {
-            Text("START YOUR ENGINES")
+            Text(Strings.Splash.startEngines)
                 .font(.system(size: 15, weight: .semibold, design: .default))
                 .foregroundColor(.white)
                 .tracking(5)
 
-            Text("GET READY FOR RACE DAY")
+            Text(Strings.Splash.getReady)
                 .font(.system(size: 11, weight: .medium, design: .default))
                 .foregroundColor(.white.opacity(0.5))
                 .tracking(4)

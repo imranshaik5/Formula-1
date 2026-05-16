@@ -2,9 +2,7 @@ import Foundation
 
 @MainActor
 final class ConstructorStandingsViewModel: ObservableObject {
-    @Published private(set) var standings: [ConstructorStanding] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var state: LoadState<[ConstructorStanding]> = .idle
 
     private let constructorService: ConstructorServiceProtocol
 
@@ -13,13 +11,12 @@ final class ConstructorStandingsViewModel: ObservableObject {
     }
 
     func loadStandings() async {
-        isLoading = true
-        error = nil
+        state = .loading
         do {
-            standings = try await constructorService.fetchConstructorStandings()
+            let standings = try await constructorService.fetchConstructorStandings()
+            state = .loaded(standings)
         } catch {
-            self.error = error
+            state = .error(error)
         }
-        isLoading = false
     }
 }

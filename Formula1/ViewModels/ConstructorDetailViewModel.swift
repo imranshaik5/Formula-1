@@ -4,7 +4,7 @@ import SwiftUI
 @MainActor
 final class ConstructorDetailViewModel: ObservableObject {
     @Published var raceResults: [ConstructorRaceResult] = []
-    @Published var isLoading = false
+    @Published var state: LoadState<Void> = .idle
 
     let standing: ConstructorStanding
     private let constructorService: ConstructorServiceProtocol
@@ -24,9 +24,7 @@ final class ConstructorDetailViewModel: ObservableObject {
     }
 
     var totalPoints: Int { standing.points }
-
     var position: Int { standing.position }
-
     var wins: Int { standing.wins }
 
     var teamSlug: String {
@@ -47,13 +45,13 @@ final class ConstructorDetailViewModel: ObservableObject {
     }
 
     func loadResults() async {
-        isLoading = true
+        state = .loading
         do {
             let results = try await constructorService.fetchConstructorResults(constructorId: standing.constructor.id)
             raceResults = results
+            state = .loaded(())
         } catch {
-            raceResults = []
+            state = .error(error)
         }
-        isLoading = false
     }
 }

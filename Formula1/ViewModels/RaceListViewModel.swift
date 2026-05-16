@@ -2,9 +2,7 @@ import Foundation
 
 @MainActor
 final class RaceListViewModel: ObservableObject {
-    @Published private(set) var races: [Race] = []
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var state: LoadState<[Race]> = .idle
 
     private let raceService: RaceServiceProtocol
 
@@ -13,13 +11,12 @@ final class RaceListViewModel: ObservableObject {
     }
 
     func loadRaces() async {
-        isLoading = true
-        error = nil
+        state = .loading
         do {
-            races = try await raceService.fetchRaces()
+            let races = try await raceService.fetchRaces()
+            state = .loaded(races)
         } catch {
-            self.error = error
+            state = .error(error)
         }
-        isLoading = false
     }
 }

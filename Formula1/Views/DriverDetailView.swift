@@ -3,7 +3,7 @@ import Kingfisher
 
 struct DriverDetailView: View {
     @StateObject private var viewModel: DriverDetailViewModel
-    @StateObject private var f1dbService = F1DBService.shared
+    @EnvironmentObject private var f1dbService: F1DBService
 
     private var f1dbDriver: F1DBDriver? {
         let f1dbID = viewModel.driver.id.replacingOccurrences(of: "_", with: "-")
@@ -47,7 +47,6 @@ struct DriverDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .task {
             await viewModel.loadDriverDetails()
-            if !f1dbService.isLoaded { await f1dbService.load() }
         }
     }
 
@@ -80,7 +79,7 @@ struct DriverDetailView: View {
                 Text("•")
                     .foregroundColor(.f1TextSecondary)
 
-                Text("#\(viewModel.driver.number)")
+                Text(Strings.DriverDetail.driverNumber(viewModel.driver.number))
                     .font(F1Theme.subheadline)
                     .foregroundColor(.f1TextSecondary)
             }
@@ -93,24 +92,24 @@ struct DriverDetailView: View {
     private var statsSection: some View {
         GlassCard {
             VStack(spacing: 16) {
-                Text("Season Statistics")
+                Text(Strings.Common.seasonStats)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 VStack(spacing: 12) {
                     HStack {
-                        statItem(label: "Position", value: "\(viewModel.driver.position)", icon: "number")
+                        statItem(label: Strings.Common.position, value: "\(viewModel.driver.position)", icon: "number")
                         Spacer()
-                        statItem(label: "Points", value: "\(viewModel.driver.points)", icon: "star.fill")
+                        statItem(label: Strings.Common.points, value: "\(viewModel.driver.points)", icon: "star.fill")
                         Spacer()
-                        statItem(label: "Wins", value: "\(viewModel.driver.wins)", icon: "trophy.fill")
+                        statItem(label: Strings.Common.wins, value: "\(viewModel.driver.wins)", icon: "trophy.fill")
                         Spacer()
-                        statItem(label: "Races", value: "\(viewModel.careerResults.count)", icon: "flag.checkered")
+                        statItem(label: Strings.Common.races, value: "\(viewModel.careerResults.count)", icon: "flag.checkered")
                     }
 
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Points Progress")
+                        Text(Strings.Common.pointsProgress)
                             .font(F1Theme.caption)
                             .foregroundColor(.f1TextSecondary)
 
@@ -135,7 +134,7 @@ struct DriverDetailView: View {
                     Image(systemName: "trophy.fill")
                         .font(.caption)
                         .foregroundColor(.yellow)
-                    Text("BEST MOMENTS")
+                    Text(Strings.DriverDetail.bestMoments)
                         .font(.system(size: 9, weight: .bold, design: .default))
                         .foregroundColor(.white.opacity(0.4))
                         .tracking(3)
@@ -147,7 +146,7 @@ struct DriverDetailView: View {
                     let pos = entry.driver.position
                     let color: Color = pos == 1 ? .yellow : pos == 2 ? F1Theme.silver : F1Theme.bronze
                     HStack(spacing: 12) {
-                        Text("P\(pos)")
+                        Text(Strings.DriverDetail.positionP(pos))
                             .font(.system(size: 13, weight: .bold, design: .monospaced))
                             .foregroundColor(color)
                             .frame(width: 32, alignment: .leading)
@@ -164,7 +163,7 @@ struct DriverDetailView: View {
                                 .foregroundColor(.f1TextSecondary)
                         }
 
-                        Text("+\(entry.points) pts")
+                        Text(Strings.DriverDetail.points(entry.points))
                             .font(.system(size: 10, weight: .bold, design: .monospaced))
                             .foregroundColor(color.opacity(0.8))
                             .frame(width: 52, alignment: .trailing)
@@ -192,7 +191,7 @@ struct DriverDetailView: View {
                     Image(systemName: "clock.arrow.circlepath")
                         .font(.caption)
                         .foregroundColor(.f1Accent)
-                    Text("2026 SEASON RESULTS")
+                    Text(Strings.DriverDetail.seasonResults)
                         .font(.system(size: 9, weight: .bold, design: .default))
                         .foregroundColor(.white.opacity(0.4))
                         .tracking(3)
@@ -203,12 +202,12 @@ struct DriverDetailView: View {
                     let entry = viewModel.careerResults[i]
                     let pos = entry.driver.position
                     HStack(spacing: 10) {
-                        Text("R\(i + 1)")
+                        Text(Strings.DriverDetail.round(i + 1))
                             .font(.system(size: 10, weight: .medium, design: .monospaced))
                             .foregroundColor(.white.opacity(0.3))
                             .frame(width: 20, alignment: .leading)
 
-                        Text("P\(pos)")
+                        Text(Strings.DriverDetail.positionP(pos))
                             .font(.system(size: 12, weight: .bold, design: .monospaced))
                             .foregroundColor(posColor(pos))
                             .frame(width: 28, alignment: .leading)
@@ -220,7 +219,7 @@ struct DriverDetailView: View {
 
                         Spacer()
 
-                        Text("\(entry.points) pts")
+                        Text(Strings.DriverDetail.points(entry.points))
                             .font(.system(size: 10, weight: .bold, design: .monospaced))
                             .foregroundColor(.white.opacity(0.4))
                     }
@@ -239,7 +238,7 @@ struct DriverDetailView: View {
 
     private var videoSection: some View {
         VStack(spacing: 12) {
-            sectionHeader(icon: "play.rectangle.fill", title: "BEST MOMENTS VIDEOS", color: .f1Accent)
+            sectionHeader(icon: "play.rectangle.fill", title: Strings.DriverDetail.bestMomentsVideos, color: .f1Accent)
                 .padding(.horizontal, 20)
 
             ScrollView(.horizontal, showsIndicators: false) {
@@ -365,6 +364,14 @@ struct DriverDetailView: View {
             Text(label)
                 .font(F1Theme.caption)
                 .foregroundColor(.f1TextSecondary)
+        }
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            DriverDetailView(viewModel: .preview)
         }
     }
 }

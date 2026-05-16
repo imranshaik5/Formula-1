@@ -14,11 +14,13 @@ struct DriverListView: View {
         self.onDriverTap = onDriverTap
     }
 
+    private var drivers: [Driver] { viewModel.state.value ?? [] }
+
     var body: some View {
         Group {
-            if viewModel.isLoading && viewModel.drivers.isEmpty {
+            if viewModel.state.isLoading && drivers.isEmpty {
                 loadingView
-            } else if let error = viewModel.error {
+            } else if let error = viewModel.state.error {
                 errorView(error)
             } else {
                 driverList
@@ -37,7 +39,7 @@ struct DriverListView: View {
                 ProgressView()
                     .tint(.f1Accent)
                     .scaleEffect(1.5)
-                Text("Loading drivers...")
+                Text(Strings.DriverList.loading)
                     .font(F1Theme.subheadline)
                     .foregroundColor(.f1TextSecondary)
             }
@@ -48,7 +50,7 @@ struct DriverListView: View {
         ZStack {
             carbonBackground
             ContentUnavailableView(
-                "Error Loading Drivers",
+                Strings.DriverList.errorTitle,
                 systemImage: "exclamationmark.triangle.fill",
                 description: Text(error.localizedDescription)
             )
@@ -64,11 +66,11 @@ struct DriverListView: View {
                     headerSection
                         .padding(.horizontal, 12)
 
-                    ForEach(Array(viewModel.drivers.enumerated()), id: \.element.id) { index, driver in
+                    ForEach(Array(drivers.enumerated()), id: \.element.id) { index, driver in
                         driverCard(driver, index: index)
                             .onTapGesture { onDriverTap(driver) }
                             .transition(.opacity.combined(with: .move(edge: .trailing)))
-                            .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: viewModel.drivers.count)
+                            .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: drivers.count)
                     }
 
                     Color.clear.frame(height: 20)
@@ -81,12 +83,12 @@ struct DriverListView: View {
 
     private var headerSection: some View {
         VStack(spacing: 4) {
-            Text("2026 SEASON")
+            Text(Strings.ConstructorStandings.season2026)
                 .font(.system(size: 11, weight: .bold, design: .default))
                 .foregroundColor(.f1Accent)
                 .tracking(4)
 
-            Text("Driver Standings")
+            Text(Strings.DriverList.title)
                 .font(.system(size: 26, weight: .bold, design: .default))
                 .foregroundColor(.white)
         }
@@ -140,7 +142,7 @@ struct DriverListView: View {
                 }
 
                 ZStack(alignment: .leading) {
-                    Text("P\(driver.position)")
+                    Text(Strings.DriverList.position(driver.position))
                         .font(.system(size: 68, weight: .black, design: .default))
                         .foregroundColor(teamColor.opacity(0.13))
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -180,7 +182,7 @@ struct DriverListView: View {
                         .font(.system(size: 20, weight: .bold, design: .monospaced))
                         .foregroundColor(.white)
 
-                    Text("PTS")
+                    Text(Strings.Common.pts)
                         .font(.system(size: 9, weight: .medium, design: .monospaced))
                         .foregroundColor(.white.opacity(0.3))
                         .tracking(2)
@@ -206,8 +208,19 @@ struct DriverListView: View {
         }
         .background(Color.f1BackgroundDeep)
         .ignoresSafeArea()
-        .onReceive(carbonTimer) { _ in
+            .onReceive(carbonTimer) { _ in
             withAnimation(.linear(duration: 0.05)) { carbonOffset += 0.1 }
+        }
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            DriverListView(
+                viewModel: .preview,
+                onDriverTap: { _ in }
+            )
         }
     }
 }

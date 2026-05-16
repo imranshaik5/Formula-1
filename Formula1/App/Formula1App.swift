@@ -3,6 +3,7 @@ import SwiftUI
 @main
 struct Formula1App: App {
     @StateObject private var coordinator = AppCoordinator()
+    @StateObject private var f1dbService = F1DBService.shared
     @State private var showSplash = true
     @State private var menuOpen = false
     @State private var selectedTab: SideMenuTab = .races
@@ -22,8 +23,12 @@ struct Formula1App: App {
                     SideMenu(isOpen: $menuOpen, selectedTab: $selectedTab)
                 }
                 .environmentObject(coordinator)
+                .environmentObject(f1dbService)
                 .preferredColorScheme(.dark)
                 .transition(.opacity)
+                .task {
+                    if !f1dbService.isLoaded { await f1dbService.load() }
+                }
             }
         }
     }

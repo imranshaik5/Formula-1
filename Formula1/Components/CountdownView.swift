@@ -36,16 +36,16 @@ struct CountdownView: View {
             }
 
             if isPast {
-                Label("Race Weekend Live!", systemImage: "play.fill")
+                Label(Strings.Countdown.raceWeekendLive, systemImage: "play.fill")
                     .font(F1Theme.subheadline)
                     .foregroundColor(.f1Accent)
                     .transition(.scale.combined(with: .opacity))
             } else {
                 HStack(spacing: 16) {
-                    countdownUnit(value: days, unit: "days")
-                    countdownUnit(value: hours, unit: "hrs")
-                    countdownUnit(value: minutes, unit: "min")
-                    countdownUnit(value: seconds, unit: "sec")
+                    countdownUnit(value: days, unit: Strings.Countdown.days)
+                    countdownUnit(value: hours, unit: Strings.Countdown.hrs)
+                    countdownUnit(value: minutes, unit: Strings.Countdown.min)
+                    countdownUnit(value: seconds, unit: Strings.Countdown.sec)
                 }
                 .transition(.opacity)
             }

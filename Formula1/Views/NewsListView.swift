@@ -8,11 +8,13 @@ struct NewsListView: View {
         _viewModel = StateObject(wrappedValue: viewModel)
     }
 
+    private var articles: [NewsArticle] { viewModel.state.value ?? [] }
+
     var body: some View {
         Group {
-            if viewModel.isLoading && viewModel.articles.isEmpty {
+            if viewModel.state.isLoading && articles.isEmpty {
                 loadingView
-            } else if viewModel.articles.isEmpty {
+            } else if articles.isEmpty {
                 emptyView
             } else {
                 newsList
@@ -29,7 +31,7 @@ struct NewsListView: View {
             ProgressView()
                 .tint(.f1Accent)
                 .scaleEffect(1.5)
-            Text("Loading news...")
+            Text(Strings.NewsList.loading)
                 .font(F1Theme.subheadline)
                 .foregroundColor(.f1TextSecondary)
         }
@@ -41,7 +43,7 @@ struct NewsListView: View {
         ContentUnavailableView(
             "No News",
             systemImage: "newspaper",
-            description: Text("Check back later for F1 news updates.")
+            description: Text(Strings.NewsList.emptyDescription)
         )
         .foregroundColor(.f1TextSecondary)
         .background(F1Theme.background)
@@ -50,7 +52,7 @@ struct NewsListView: View {
     private var newsList: some View {
         ScrollView {
             LazyVStack(spacing: 12) {
-                ForEach(Array(viewModel.articles.enumerated()), id: \.element.id) { index, article in
+                ForEach(Array(articles.enumerated()), id: \.element.id) { index, article in
                     newsCard(article, index: index)
                 }
             }
@@ -84,7 +86,7 @@ struct NewsListView: View {
             }
         }
         .transition(.move(edge: .trailing).combined(with: .opacity))
-        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: viewModel.articles.count)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: articles.count)
     }
 
     private func sourceBadge(_ source: String) -> some View {
@@ -96,5 +98,13 @@ struct NewsListView: View {
             .padding(.vertical, 3)
             .background(F1Theme.accentRed.opacity(0.15))
             .clipShape(Capsule())
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            NewsListView(viewModel: .preview)
+        }
     }
 }

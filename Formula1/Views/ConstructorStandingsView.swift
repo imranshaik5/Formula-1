@@ -11,17 +11,19 @@ struct ConstructorStandingsView: View {
         self.onConstructorTap = onConstructorTap
     }
 
+    private var standings: [ConstructorStanding] { viewModel.state.value ?? [] }
+
     var body: some View {
         Group {
-            if viewModel.isLoading && viewModel.standings.isEmpty {
+            if viewModel.state.isLoading && standings.isEmpty {
                 loadingView
-            } else if let error = viewModel.error {
+            } else if let error = viewModel.state.error {
                 errorView(error)
             } else {
                 constructorList
             }
         }
-        .navigationTitle("Constructors")
+        .navigationTitle(Strings.ConstructorList.title)
         .task {
             await viewModel.loadStandings()
         }
@@ -32,7 +34,7 @@ struct ConstructorStandingsView: View {
             ProgressView()
                 .tint(.f1Accent)
                 .scaleEffect(1.5)
-            Text("Loading standings...")
+            Text(Strings.ConstructorList.loading)
                 .font(F1Theme.subheadline)
                 .foregroundColor(.f1TextSecondary)
         }
@@ -42,7 +44,7 @@ struct ConstructorStandingsView: View {
 
     private func errorView(_ error: Error) -> some View {
         ContentUnavailableView(
-            "Error Loading Standings",
+            Strings.ConstructorList.errorTitle,
             systemImage: "exclamationmark.triangle.fill",
             description: Text(error.localizedDescription)
         )
@@ -55,7 +57,7 @@ struct ConstructorStandingsView: View {
             LazyVStack(spacing: 8) {
                 headerSection
 
-                ForEach(Array(viewModel.standings.enumerated()), id: \.element.id) { index, standing in
+                ForEach(Array(standings.enumerated()), id: \.element.id) { index, standing in
                     constructorRow(standing, index: index)
                         .onTapGesture { onConstructorTap(standing) }
                 }
@@ -67,12 +69,12 @@ struct ConstructorStandingsView: View {
 
     private var headerSection: some View {
         VStack(spacing: 4) {
-            Text("2026 SEASON")
+            Text(Strings.ConstructorStandings.season2026)
                 .font(.system(size: 11, weight: .bold, design: .default))
                 .foregroundColor(.f1Accent)
                 .tracking(4)
 
-            Text("Constructors Championship")
+            Text(Strings.ConstructorStandings.championship)
                 .font(.system(size: 24, weight: .bold, design: .default))
                 .foregroundColor(.white)
         }
@@ -102,7 +104,7 @@ struct ConstructorStandingsView: View {
                     .foregroundColor(.white)
                     .lineLimit(1)
 
-                Text("\(standing.wins) \(standing.wins == 1 ? "win" : "wins")")
+                Text(standing.wins == 1 ? Strings.ConstructorList.win(standing.wins) : Strings.ConstructorList.wins(standing.wins))
                     .font(F1Theme.caption)
                     .foregroundColor(.f1TextSecondary)
             }
@@ -114,7 +116,7 @@ struct ConstructorStandingsView: View {
                     .font(F1Theme.statistic)
                     .foregroundColor(standing.constructor.color)
 
-                Text("points")
+                Text(Strings.ConstructorStandings.points)
                     .font(F1Theme.caption)
                     .foregroundColor(.f1TextSecondary)
             }
@@ -127,6 +129,17 @@ struct ConstructorStandingsView: View {
                 .stroke(Color.white.opacity(0.05), lineWidth: 1)
         )
         .transition(.move(edge: .trailing).combined(with: .opacity))
-        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.02), value: viewModel.standings.count)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.02), value: standings.count)
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            ConstructorStandingsView(
+                viewModel: .preview,
+                onConstructorTap: { _ in }
+            )
+        }
     }
 }

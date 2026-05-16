@@ -78,7 +78,7 @@ struct PodiumView: View {
                     )
                     .shadow(color: glow, radius: position == 1 ? 16 : 8, x: 0, y: 0)
 
-                Text("#\(position)")
+                Text(Strings.Podium.position(position))
                     .font(.system(size: position == 1 ? 22 : 16, weight: .bold, design: .rounded))
                     .foregroundColor(color)
                     .shadow(color: glow, radius: position == 1 ? 8 : 4, x: 0, y: 0)

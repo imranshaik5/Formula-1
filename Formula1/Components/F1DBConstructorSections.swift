@@ -7,24 +7,24 @@ struct F1DBConstructorAllTimeStatsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 16) {
-                Text("All-Time Stats")
+                Text(Strings.F1DB.allTimeStats)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
-                    statItem(label: "Entries", value: "\(constructor.totalRaceEntries)")
-                    statItem(label: "Starts", value: "\(constructor.totalRaceStarts)")
-                    statItem(label: "Wins", value: "\(constructor.totalRaceWins)")
-                    statItem(label: "1-2 Finishes", value: "\(constructor.total1And2Finishes)")
-                    statItem(label: "Podiums", value: "\(constructor.totalPodiums)")
-                    statItem(label: "Pole Positions", value: "\(constructor.totalPolePositions)")
-                    statItem(label: "Fastest Laps", value: "\(constructor.totalFastestLaps)")
-                    statItem(label: "Championships", value: "\(constructor.totalChampionshipWins)")
-                    statItem(label: "Points", value: formatPoints(constructor.totalPoints))
-                    statItem(label: "Best Champ", value: constructor.bestChampionshipPosition.map { "P\($0)" } ?? "—")
-                    statItem(label: "Best Result", value: constructor.bestRaceResult.map { "P\($0)" } ?? "—")
-                    statItem(label: "Sprint Wins", value: "\(constructor.totalSprintRaceWins)")
+                    statItem(label: Strings.F1DB.entries, value: "\(constructor.totalRaceEntries)")
+                    statItem(label: Strings.F1DB.starts, value: "\(constructor.totalRaceStarts)")
+                    statItem(label: Strings.F1DB.wins, value: "\(constructor.totalRaceWins)")
+                    statItem(label: Strings.F1DB.oneTwoFinishes, value: "\(constructor.total1And2Finishes)")
+                    statItem(label: Strings.F1DB.podiums, value: "\(constructor.totalPodiums)")
+                    statItem(label: Strings.F1DB.polePositions, value: "\(constructor.totalPolePositions)")
+                    statItem(label: Strings.F1DB.fastestLaps, value: "\(constructor.totalFastestLaps)")
+                    statItem(label: Strings.F1DB.championships, value: "\(constructor.totalChampionshipWins)")
+                    statItem(label: Strings.F1DB.points, value: formatPoints(constructor.totalPoints))
+                    statItem(label: Strings.F1DB.bestChamp, value: constructor.bestChampionshipPosition.map { Strings.F1DB.StartingGrid.position($0) } ?? "—")
+                    statItem(label: Strings.F1DB.bestResult, value: constructor.bestRaceResult.map { Strings.F1DB.StartingGrid.position($0) } ?? "—")
+                    statItem(label: Strings.F1DB.sprintWins, value: "\(constructor.totalSprintRaceWins)")
                 }
             }
         }
@@ -56,7 +56,7 @@ struct F1DBConstructorChronologySection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                Text("History")
+                Text(Strings.F1DB.history)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -95,7 +95,7 @@ struct F1DBConstructorChronologySection: View {
                         Text("– \(yearTo)")
                             .font(.system(.caption, design: .monospaced))
                     } else {
-                        Text("– Present")
+                        Text("\u{2013} \(Strings.F1DB.present)")
                             .font(.system(.caption, design: .monospaced))
                     }
                 }

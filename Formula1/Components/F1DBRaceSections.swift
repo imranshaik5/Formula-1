@@ -14,7 +14,7 @@ struct F1DBGrandPrixBadge: View {
                 .background(Color.f1Accent.opacity(0.15))
                 .cornerRadius(4)
 
-            Text("Round \(gp.totalRacesHeld)")
+            Text(Strings.F1DB.GrandPrix.round(gp.totalRacesHeld))
                 .font(.system(.caption2, design: .rounded))
                 .foregroundColor(.f1TextSecondary)
         }
@@ -46,7 +46,7 @@ struct F1DBGrandPrixBadgeSection: View {
                 }
 
                 HStack(spacing: 12) {
-                    Label("\(gp.totalRacesHeld) races held", systemImage: "flag.checkered")
+                    Label(Strings.F1DB.GrandPrix.racesHeld(gp.totalRacesHeld), systemImage: "flag.checkered")
                         .font(.system(.caption, design: .rounded))
                         .foregroundColor(.f1TextSecondary)
 
@@ -73,22 +73,22 @@ struct F1DBQualifyingResultsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                sectionHeader("Qualifying")
+                sectionHeader(Strings.F1DB.Qualifying.title)
 
                 if qualifying.isEmpty {
                     emptyText
                 } else {
                     // Header row
                     HStack(spacing: 4) {
-                        Text("Pos").frame(width: 28, alignment: .leading)
+                        Text(Strings.F1DB.Qualifying.pos).frame(width: 28, alignment: .leading)
                             .font(.system(.caption2, design: .monospaced)).foregroundColor(.f1TextSecondary)
-                        Text("Driver").frame(maxWidth: .infinity, alignment: .leading)
+                        Text(Strings.F1DB.Qualifying.driver).frame(maxWidth: .infinity, alignment: .leading)
                             .font(.system(.caption2, design: .monospaced)).foregroundColor(.f1TextSecondary)
-                        Text("Q1").frame(width: 60, alignment: .trailing)
+                        Text(Strings.F1DB.Qualifying.q1).frame(width: 60, alignment: .trailing)
                             .font(.system(.caption2, design: .monospaced)).foregroundColor(.f1TextSecondary)
-                        Text("Q2").frame(width: 60, alignment: .trailing)
+                        Text(Strings.F1DB.Qualifying.q2).frame(width: 60, alignment: .trailing)
                             .font(.system(.caption2, design: .monospaced)).foregroundColor(.f1TextSecondary)
-                        Text("Q3").frame(width: 60, alignment: .trailing)
+                        Text(Strings.F1DB.Qualifying.q3).frame(width: 60, alignment: .trailing)
                             .font(.system(.caption2, design: .monospaced)).foregroundColor(.f1TextSecondary)
                     }
                     .padding(.horizontal, 8)
@@ -98,7 +98,7 @@ struct F1DBQualifyingResultsSection: View {
                     }
 
                     if qualifying.count > 15 {
-                        Text("+ \(qualifying.count - 15) more")
+                        Text(Strings.Common.moreCount(qualifying.count - 15))
                             .font(.system(.caption, design: .rounded))
                             .foregroundColor(.f1TextSecondary)
                     }
@@ -152,7 +152,7 @@ struct F1DBStartingGridSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                sectionHeader("Starting Grid")
+                sectionHeader(Strings.F1DB.StartingGrid.title)
 
                 if grid.isEmpty {
                     emptyText
@@ -161,7 +161,7 @@ struct F1DBStartingGridSection: View {
                         gridRow(entry)
                     }
                     if grid.count > 10 {
-                        Text("+ \(grid.count - 10) more")
+                        Text(Strings.Common.moreCount(grid.count - 10))
                             .font(.system(.caption, design: .rounded))
                             .foregroundColor(.f1TextSecondary)
                     }
@@ -173,7 +173,7 @@ struct F1DBStartingGridSection: View {
 
     private func gridRow(_ entry: F1DBStartingGridPosition) -> some View {
         HStack(spacing: 8) {
-            Text("P\(entry.positionNumber ?? 0)")
+                Text(Strings.F1DB.StartingGrid.position(entry.positionNumber ?? 0))
                 .font(.system(.caption, design: .monospaced).weight(.bold))
                 .foregroundColor(positionColor(entry.positionNumber))
                 .frame(width: 28)
@@ -210,7 +210,7 @@ struct F1DBFastestLapsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                sectionHeader("Fastest Laps")
+                sectionHeader(Strings.F1DB.fastestLaps)
 
                 if fastestLaps.isEmpty {
                     emptyText
@@ -230,7 +230,7 @@ struct F1DBFastestLapsSection: View {
                             Spacer()
 
                             if let lapNum = lap.lap {
-                                Text("Lap \(lapNum)")
+                                Text(Strings.F1DB.FastestLaps.lap(lapNum))
                                     .font(.system(.caption, design: .monospaced))
                                     .foregroundColor(.f1TextSecondary)
                             }
@@ -256,7 +256,7 @@ struct F1DBPitStopsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                sectionHeader("Pit Stops")
+                sectionHeader(Strings.F1DB.PitStops.title)
 
                 if pitStops.isEmpty {
                     emptyText
@@ -269,7 +269,7 @@ struct F1DBPitStopsSection: View {
                                 .lineLimit(1)
                                 .frame(maxWidth: .infinity, alignment: .leading)
 
-                            Text("Lap \(stop.lap)")
+                            Text(Strings.F1DB.PitStops.lap(stop.lap))
                                 .font(.system(.caption2, design: .monospaced))
                                 .foregroundColor(.f1TextSecondary)
 
@@ -294,7 +294,7 @@ struct F1DBDriverOfTheDaySection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                sectionHeader("Driver of the Day")
+                sectionHeader(Strings.F1DB.DriverOfTheDay.title)
 
                 if dotd.isEmpty {
                     emptyText
@@ -311,7 +311,7 @@ struct F1DBDriverOfTheDaySection: View {
                                     .foregroundColor(.white)
 
                                 if let pct = result.percentage {
-                                    Text("\(String(format: "%.1f", pct))% of votes")
+                                    Text(Strings.F1DB.DriverOfTheDay.percentage(pct))
                                         .font(.system(.caption, design: .rounded))
                                         .foregroundColor(.f1TextSecondary)
                                 }
@@ -337,7 +337,7 @@ private func sectionHeader(_ title: String) -> some View {
 }
 
 private var emptyText: some View {
-    Text("No data available")
+    Text(Strings.F1DB.noData)
         .font(F1Theme.subheadline)
         .foregroundColor(.f1TextSecondary)
         .padding(.vertical, 8)

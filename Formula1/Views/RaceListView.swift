@@ -10,11 +10,13 @@ struct RaceListView: View {
         self.onRaceTap = onRaceTap
     }
 
+    private var races: [Race] { viewModel.state.value ?? [] }
+
     var body: some View {
         Group {
-            if viewModel.isLoading && viewModel.races.isEmpty {
+            if viewModel.state.isLoading && races.isEmpty {
                 loadingView
-            } else if let error = viewModel.error {
+            } else if let error = viewModel.state.error {
                 errorView(error)
             } else {
                 raceList
@@ -58,7 +60,7 @@ struct RaceListView: View {
                         .frame(height: 4)
                         .padding(.horizontal, 16)
 
-                    if let next = viewModel.races.first(where: { !$0.status.isCompleted }) {
+                    if let next = races.first(where: { !$0.status.isCompleted }) {
                         heroCard(next)
                     }
 
@@ -69,7 +71,7 @@ struct RaceListView: View {
                         .padding(.horizontal, 20)
                         .padding(.top, 8)
 
-                    ForEach(Array(viewModel.races.enumerated()), id: \.element.id) { index, race in
+                    ForEach(Array(races.enumerated()), id: \.element.id) { index, race in
                         raceCard(race, index: index)
                             .onTapGesture { onRaceTap(race) }
                     }
@@ -220,7 +222,7 @@ struct RaceListView: View {
         .shadow(color: .black.opacity(0.2), radius: 8, x: 0, y: 4)
         .padding(.horizontal, 16)
         .transition(.move(edge: .trailing).combined(with: .opacity))
-        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: viewModel.races.count)
+        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: races.count)
     }
 
     // MARK: - Status Badge
@@ -276,7 +278,7 @@ struct RaceListView: View {
     // MARK: - Season Year
 
     private var seasonYearText: String {
-        let year = Calendar.current.component(.year, from: viewModel.races.first?.date ?? Date())
+        let year = Calendar.current.component(.year, from: races.first?.date ?? Date())
         return "\(year) \(Strings.RaceList.seasonCalendar)"
     }
 
@@ -292,5 +294,16 @@ struct RaceListView: View {
             "Abu Dhabi": "🇦🇪", "Mexico City": "🇲🇽", "São Paulo": "🇧🇷"
         ]
         return flags[country, default: "🏁"]
+    }
+}
+
+#Preview {
+    PreviewWrapper {
+        NavigationStack {
+            RaceListView(
+                viewModel: .preview,
+                onRaceTap: { _ in }
+            )
+        }
     }
 }

@@ -7,24 +7,24 @@ struct F1DBCareerStatsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 16) {
-                Text("All-Time Career Stats")
+                Text(Strings.F1DB.allTimeCareerStats)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 4), spacing: 16) {
-                    statItem(label: "Entries", value: "\(driver.totalRaceEntries)")
-                    statItem(label: "Starts", value: "\(driver.totalRaceStarts)")
-                    statItem(label: "Wins", value: "\(driver.totalRaceWins)")
-                    statItem(label: "Podiums", value: "\(driver.totalPodiums)")
-                    statItem(label: "Poles", value: "\(driver.totalPolePositions)")
-                    statItem(label: "Fastest Laps", value: "\(driver.totalFastestLaps)")
-                    statItem(label: "DOTD", value: "\(driver.totalDriverOfTheDay)")
-                    statItem(label: "Grand Slams", value: "\(driver.totalGrandSlams)")
-                    statItem(label: "Championships", value: "\(driver.totalChampionshipWins)")
-                    statItem(label: "Points", value: formatPoints(driver.totalChampionshipPoints))
-                    statItem(label: "Laps Led", value: "\(driver.totalRaceLaps)")
-                    statItem(label: "Best Champ", value: driver.bestChampionshipPosition.map { "P\($0)" } ?? "—")
+                    statItem(label: Strings.F1DB.entries, value: "\(driver.totalRaceEntries)")
+                    statItem(label: Strings.F1DB.starts, value: "\(driver.totalRaceStarts)")
+                    statItem(label: Strings.F1DB.wins, value: "\(driver.totalRaceWins)")
+                    statItem(label: Strings.F1DB.podiums, value: "\(driver.totalPodiums)")
+                    statItem(label: Strings.F1DB.poles, value: "\(driver.totalPolePositions)")
+                    statItem(label: Strings.F1DB.fastestLaps, value: "\(driver.totalFastestLaps)")
+                    statItem(label: Strings.F1DB.dotd, value: "\(driver.totalDriverOfTheDay)")
+                    statItem(label: Strings.F1DB.grandSlams, value: "\(driver.totalGrandSlams)")
+                    statItem(label: Strings.F1DB.championships, value: "\(driver.totalChampionshipWins)")
+                    statItem(label: Strings.F1DB.points, value: formatPoints(driver.totalChampionshipPoints))
+                    statItem(label: Strings.F1DB.lapsLed, value: "\(driver.totalRaceLaps)")
+                    statItem(label: Strings.F1DB.bestChamp, value: driver.bestChampionshipPosition.map { Strings.F1DB.StartingGrid.position($0) } ?? "—")
                 }
             }
         }
@@ -57,7 +57,7 @@ struct F1DBFamilyRelationshipsSection: View {
     var body: some View {
         GlassCard {
             VStack(spacing: 12) {
-                Text("Family")
+                Text(Strings.F1DB.family)
                     .font(F1Theme.headline)
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -104,12 +104,12 @@ struct F1DBFamilyRelationshipsSection: View {
 
     private func labelFor(_ type: String) -> String {
         switch type {
-        case "CHILD": return "Child"
-        case "PARENT": return "Parent"
-        case "SIBLING": return "Sibling"
-        case "SIBLINGS_CHILD": return "Niece/Nephew"
-        case "COUSIN": return "Cousin"
-        case "MARRIED": return "Spouse"
+        case "CHILD": return Strings.F1DB.familyChild
+        case "PARENT": return Strings.F1DB.familyParent
+        case "SIBLING": return Strings.F1DB.familySibling
+        case "SIBLINGS_CHILD": return Strings.F1DB.familyNieceNephew
+        case "COUSIN": return Strings.F1DB.familyCousin
+        case "MARRIED": return Strings.F1DB.familySpouse
         default: return type
         }
     }

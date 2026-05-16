@@ -3,8 +3,7 @@ import Foundation
 @MainActor
 final class RaceDetailViewModel: ObservableObject {
     @Published private(set) var race: Race
-    @Published private(set) var isLoading = false
-    @Published private(set) var error: Error?
+    @Published var loadState: LoadState<Void> = .idle
 
     private let raceService: RaceServiceProtocol
 
@@ -14,8 +13,7 @@ final class RaceDetailViewModel: ObservableObject {
     }
 
     func loadRaceDetails() async {
-        isLoading = true
-        error = nil
+        loadState = .loading
         do {
             if let updated = try await raceService.fetchRace(by: race.id) {
                 race = updated
@@ -33,9 +31,9 @@ final class RaceDetailViewModel: ObservableObject {
                     )
                 }
             }
+            loadState = .loaded(())
         } catch {
-            self.error = error
+            loadState = .error(error)
         }
-        isLoading = false
     }
 }
