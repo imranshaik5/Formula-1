@@ -2,10 +2,6 @@
 
 A dark-mode native iOS app for Formula 1 fans — race calendar, driver & constructor standings, driver profiles, video content, and **AI-powered race predictions**.
 
-> **Note:** A demo video is bundled with the Xcode project at `Formula1/Resources/demo.mp4`. On GitHub, click below to view:
-
-https://github.com/user-attachments/assets/7c69a22e-63c2-43a7-a238-8f21f60704cb
-
 Built with SwiftUI, Kingfisher, and Alamofire. Race data sourced from the [F1DB](https://github.com/f1db/f1db) historical database (1950–2026, 83M JSON) with live data from [Jolpica](https://jolpica.com) (Ergast fork) and images from the official F1 Media CDN.
 
 ## Features
