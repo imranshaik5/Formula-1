@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct NewsListView: View {
     @StateObject private var viewModel: NewsViewModel
@@ -15,6 +16,8 @@ struct NewsListView: View {
         Group {
             if viewModel.state.isLoading && articles.isEmpty {
                 loadingView
+            } else if case .error = viewModel.state, articles.isEmpty {
+                errorView
             } else if articles.isEmpty {
                 emptyView
             } else {
@@ -23,7 +26,13 @@ struct NewsListView: View {
         }
         .navigationTitle(Strings.NewsList.title)
         .task {
-            await viewModel.loadArticles()
+            if articles.isEmpty {
+                await viewModel.loadArticles()
+            }
+            viewModel.startAutoRefresh()
+        }
+        .onDisappear {
+            viewModel.stopAutoRefresh()
         }
     }
 
@@ -40,6 +49,24 @@ struct NewsListView: View {
         .background(F1Theme.background)
     }
 
+    private var errorView: some View {
+        ContentUnavailableView(
+            Strings.NewsList.errorTitle,
+            systemImage: "wifi.slash",
+            description: Text(Strings.NewsList.errorDescription)
+        )
+        .foregroundColor(.f1TextSecondary)
+        .background(F1Theme.background)
+        .overlay(alignment: .bottom) {
+            Button(Strings.NewsList.retry) {
+                Task { await viewModel.loadArticles() }
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.f1Accent)
+            .padding(.bottom, 40)
+        }
+    }
+
     private var emptyView: some View {
         ContentUnavailableView(
             Strings.NewsList.emptyTitle,
@@ -52,65 +79,86 @@ struct NewsListView: View {
 
     private var newsList: some View {
         ScrollView {
+            lastUpdatedBar
+            refreshIndicator
             LazyVStack(spacing: 12) {
                 ForEach(Array(articles.enumerated()), id: \.element.id) { index, article in
-                    newsCard(article, index: index)
+                    NewsCardView(article: article, summary: summaries[article.id])
+                        .transition(.move(edge: .trailing).combined(with: .opacity))
+                        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: articles.count)
+                        .task {
+                            guard summaries[article.id] == nil else { return }
+                            summaries[article.id] = Summarizer.extractSummary(from: article.description)
+                        }
                 }
             }
             .padding(12)
         }
         .background(F1Theme.background)
+        .refreshable {
+            await viewModel.refresh()
+        }
     }
 
-    private func newsCard(_ article: NewsArticle, index: Int) -> some View {
-        GlassCard {
-            VStack(alignment: .leading, spacing: 8) {
-                HStack {
-                    sourceBadge(article.source)
-                    Spacer()
-                    Text(article.relativeDate)
-                        .font(F1Theme.caption)
-                        .foregroundColor(.f1TextSecondary)
-                }
+    @ViewBuilder
+    private var lastUpdatedBar: some View {
+        if let lastUpdated = viewModel.lastUpdated {
+            HStack {
+                Spacer()
+                Text("\(Strings.NewsList.lastUpdated) • \(lastUpdated.formatted(date: .omitted, time: .shortened))")
+                    .font(.system(size: 11))
+                    .foregroundColor(.f1TextSecondary.opacity(0.6))
+                Spacer()
+            }
+            .padding(.top, 8)
+        }
+    }
 
-                Text(article.title)
-                    .font(F1Theme.headline)
-                    .foregroundColor(.white)
-                    .lineLimit(2)
+    @ViewBuilder
+    private var refreshIndicator: some View {
+        if viewModel.isRefreshing {
+            ProgressView()
+                .tint(.f1Accent)
+                .padding(.vertical, 8)
+        }
+    }
+}
 
-                if !article.description.isEmpty {
-                    Text(article.description)
-                        .font(F1Theme.subheadline)
-                        .foregroundColor(.f1TextSecondary)
-                        .lineLimit(4)
-                }
+private struct NewsCardView: View {
+    let article: NewsArticle
+    let summary: String?
 
-                if let summary = summaries[article.id] {
-                    HStack(spacing: 6) {
-                        Image(systemName: "sparkle.magnifyingglass")
-                            .font(.system(size: 10))
-                            .foregroundColor(.f1Accent)
-                        Text(summary)
-                            .font(.system(.caption, design: .rounded))
-                            .foregroundColor(.f1TextSecondary.opacity(0.8))
-                            .lineLimit(2)
-                    }
-                    .padding(8)
-                    .background(.ultraThinMaterial)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+    var body: some View {
+        Button {
+            guard let url = URL(string: article.url) else { return }
+            UIApplication.shared.open(url)
+        } label: {
+            GlassCard {
+                VStack(alignment: .leading, spacing: 8) {
+                    cardHeader
+                    cardImage
+                    cardTitle
+                    cardDescription
+                    cardSummary
+                    cardFooter
                 }
             }
         }
-        .transition(.move(edge: .trailing).combined(with: .opacity))
-        .animation(.spring(response: 0.4, dampingFraction: 0.8).delay(Double(index) * 0.03), value: articles.count)
-        .task {
-            guard summaries[article.id] == nil else { return }
-            summaries[article.id] = Summarizer.extractSummary(from: article.description)
+        .buttonStyle(.plain)
+    }
+
+    private var cardHeader: some View {
+        HStack {
+            sourceBadge
+            Spacer()
+            Text(article.relativeDate)
+                .font(F1Theme.caption)
+                .foregroundColor(.f1TextSecondary)
         }
     }
 
-    private func sourceBadge(_ source: String) -> some View {
-        Text(source)
+    private var sourceBadge: some View {
+        Text(article.source)
             .font(F1Theme.caption)
             .fontWeight(.semibold)
             .foregroundColor(.f1Accent)
@@ -118,6 +166,73 @@ struct NewsListView: View {
             .padding(.vertical, 3)
             .background(F1Theme.accentRed.opacity(0.15))
             .clipShape(Capsule())
+    }
+
+    @ViewBuilder
+    private var cardImage: some View {
+        if let imageURL = article.imageURL, let url = URL(string: imageURL) {
+            KFImage(url)
+                .placeholder { imagePlaceholder }
+                .resizable()
+                .aspectRatio(16/9, contentMode: .fill)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+    }
+
+    private var imagePlaceholder: some View {
+        Rectangle()
+            .fill(F1Theme.cardBackground)
+            .overlay {
+                Image(systemName: "photo")
+                    .foregroundColor(.f1TextSecondary)
+            }
+    }
+
+    private var cardTitle: some View {
+        Text(article.title)
+            .font(F1Theme.headline)
+            .foregroundColor(.white)
+            .lineLimit(2)
+            .multilineTextAlignment(.leading)
+    }
+
+    @ViewBuilder
+    private var cardDescription: some View {
+        if !article.description.isEmpty {
+            Text(article.description)
+                .font(F1Theme.subheadline)
+                .foregroundColor(.f1TextSecondary)
+                .lineLimit(4)
+                .multilineTextAlignment(.leading)
+        }
+    }
+
+    @ViewBuilder
+    private var cardSummary: some View {
+        if let summary {
+            HStack(spacing: 6) {
+                Image(systemName: "sparkle.magnifyingglass")
+                    .font(.system(size: 10))
+                    .foregroundColor(.f1Accent)
+                Text(summary)
+                    .font(.system(.caption, design: .rounded))
+                    .foregroundColor(.f1TextSecondary.opacity(0.8))
+                    .lineLimit(2)
+            }
+            .padding(8)
+            .background(.ultraThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+        }
+    }
+
+    private var cardFooter: some View {
+        HStack(spacing: 4) {
+            Image(systemName: "safari")
+                .font(.system(size: 10))
+            Text(Strings.NewsList.openArticle)
+                .font(.system(.caption, design: .rounded))
+        }
+        .foregroundColor(.f1Accent)
     }
 }
 

@@ -125,11 +125,27 @@ enum Strings {
         static let seasonResults = NSLocalizedString("constructor_detail.season_results", value: "Season Statistics", comment: "Section title")
     }
 
+    enum NewsService {
+        static let userAgent = NSLocalizedString("news_service.user_agent", value: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36", comment: "HTTP User-Agent header")
+        static let sourceTheRace = NSLocalizedString("news_service.source_the_race", value: "The Race", comment: "RSS source display name")
+        static let sourceBBC = NSLocalizedString("news_service.source_bbc", value: "BBC Sport", comment: "RSS source display name")
+        static let sourceMotorsport = NSLocalizedString("news_service.source_motorsport", value: "Motorsport", comment: "RSS source display name")
+        static let categoryFormula1 = NSLocalizedString("news_service.category_f1", value: "Formula 1", comment: "RSS category filter")
+        static let errorInvalidResponse = NSLocalizedString("news_service.error_invalid_response", value: "Invalid response from news source", comment: "Error description")
+        static let errorAllSourcesFailed = NSLocalizedString("news_service.error_all_sources_failed", value: "Unable to fetch news from any source", comment: "Error description")
+        static let errorCancelled = NSLocalizedString("news_service.error_cancelled", value: "News fetch was cancelled", comment: "Error description")
+    }
+
     enum NewsList {
         static let title = NSLocalizedString("news_list.title", value: "News", comment: "News list navigation title")
         static let loading = NSLocalizedString("news_list.loading", value: "Loading news...", comment: "Loading indicator text")
         static let emptyTitle = NSLocalizedString("news_list.empty_title", value: "No News", comment: "Empty state title")
         static let emptyDescription = NSLocalizedString("news_list.empty_description", value: "Check back later for F1 news updates.", comment: "Empty state description")
+        static let errorTitle = NSLocalizedString("news_list.error_title", value: "Failed to Load News", comment: "Error state title")
+        static let errorDescription = NSLocalizedString("news_list.error_description", value: "Please check your internet connection and try again.", comment: "Error state description")
+        static let retry = NSLocalizedString("news_list.retry", value: "Retry", comment: "Retry button label")
+        static let lastUpdated = NSLocalizedString("news_list.last_updated", value: "Updated just now", comment: "Last updated time label")
+        static let openArticle = NSLocalizedString("news_list.open_article", value: "Open Article", comment: "Article card footer link")
     }
 
     enum Splash {

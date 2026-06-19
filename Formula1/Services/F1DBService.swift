@@ -28,6 +28,10 @@ final class F1DBService: ObservableObject {
         cacheURL = caches.appendingPathComponent("f1db-cache.json")
     }
 
+    func ensureLoaded() {
+        _ = loadTask
+    }
+
     private func loadAsync() async {
         await MainActor.run { isLoading = true }
 
