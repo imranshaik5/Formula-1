@@ -12,7 +12,9 @@ Built with SwiftUI, Kingfisher, and Alamofire. Race data sourced from the [F1DB]
 - **Constructor Standings** — Team standings with color bars and championship headers
 - **Driver Profiles** — Headshot, nationality flag, stats (wins, points bar, race count), career results, best moments, and YouTube video thumbnails
 - **Historical Race Data** — Qualifying results, starting grids, fastest laps, pit stops, driver of the day for all past races
-- **News** — News feed from The Race RSS with AI-generated summaries
+- **News** — News feed from The Race RSS with AI-generated summaries, banner carousel on the race list screen
+- **Trivia** — 10-question F1 quiz covering history, drivers, circuits, and records with score tracking
+- **F1 Tickets & Store** — Quick links to official ticket sales and merchandise via the side menu
 - **Dark Mode** — Carbon fiber backgrounds, frosted glass panels, gradient borders, team-colored accents
 - **Navigation** — Coordinator pattern with deep linking between races, drivers, and constructors
 
