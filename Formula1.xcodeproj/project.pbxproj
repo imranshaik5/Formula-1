@@ -12,7 +12,9 @@
 		0D76980E63A444C6BFB342F0659F1FEB /* Summarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A7C1EB2B7402F822BFF45BFB429F5 /* Summarizer.swift */; };
 		15B0BB1EC19911A3F447DEC7 /* F1DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA90A8572823E4E34014010 /* F1DBService.swift */; };
 		1DECB60D746443E6A1658126 /* F1DBRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1170FA7E14480A923883E9 /* F1DBRace.swift */; };
+		1F0E170C30E024B1ECB57C49 /* NewsBannerCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */; };
 		2016E6C6DFAA5FAE94A11EB9 /* F1DBService+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46735E2E28FE653C6217EBD4 /* F1DBService+Shared.swift */; };
+		34A38111210049DBAE745702 /* TriviaQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */; };
 		376564B717DD4FFD9B59E7EB /* F1DBSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDC635F866047BD9287A336 /* F1DBSupport.swift */; };
 		4790EB1256454B7BA15C9664 /* F1DBCircuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD5A3A19144A0D8BD99F02 /* F1DBCircuit.swift */; };
 		4B489330B49C4B31AF038FE0 /* RaceResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B133B127D0D7441EB8B26FCA /* RaceResultsTable.swift */; };
@@ -71,12 +73,14 @@
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8028 /* ConstructorDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E8027 /* ConstructorDetailViewModel.swift */; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8029 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E7025 /* SideMenu.swift */; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8032 /* f1db.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E8031 /* f1db.json */; };
+		6CD7DC3B4C5716EECE480545 /* TriviaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */; };
 		70D40457003341489AE01566 /* F1DBSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7874DDEC38B4E849C47BB59 /* F1DBSeason.swift */; };
 		7FF3FD8FC48C4CDF89FA50D8 /* F1DBRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D646E0D59414418AB3550D5A /* F1DBRoot.swift */; };
 		82A246781F1A494591F6CA07 /* F1DBConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5473D6B77584860A8FF334D /* F1DBConstructor.swift */; };
 		8913A26D05334012A7E3D52B /* F1DBDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE92D05BAA45848FACAD1F /* F1DBDriver.swift */; };
 		8A64CB41699449DFAE255AE8 /* RaceGridComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC427D354D14DEA8CF7481D /* RaceGridComparisonView.swift */; };
 		8B8AC7A41328CA6E80124B46 /* F1DBConstructorSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A2DABF96439E66F9759928D /* F1DBConstructorSections.swift */; };
+		8CA24E888037151A27F30EDE /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */; };
 		965E7A4BAB7743D9A73ECEF85A3CDCCE /* F1DBPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB7F0A1DC474B930C7C0192C5A1BB /* F1DBPredictor.swift */; };
 		96DFEACB37DAEF0D3E1546CB /* F1DBPredictorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD735C9EFDD6F3FC324D8353 /* F1DBPredictorTests.swift */; };
 		9E8A7B6C5D4E3F2A1B0C9D8E /* AIPredictionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7890ABCDEF12 /* AIPredictionService.swift */; };
@@ -119,6 +123,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 		0DC427D354D14DEA8CF7481D /* RaceGridComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceGridComparisonView.swift; sourceTree = "<group>"; };
 		0E0592F747FB44FBA210CFEA /* RaceDetailsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceDetailsCard.swift; sourceTree = "<group>"; };
 		11A3DF8628B40E3762695FFD /* F1DBDriverSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBDriverSections.swift; sourceTree = "<group>"; };
@@ -127,6 +132,7 @@
 		23CE0E3EC4BEDD6FA3E0A0A7 /* F1DBModelDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBModelDecodingTests.swift; sourceTree = "<group>"; };
 		35A8326658B316E7B1829E12 /* YouTubeService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = YouTubeService.swift; sourceTree = "<group>"; };
 		46735E2E28FE653C6217EBD4 /* F1DBService+Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "F1DBService+Shared.swift"; sourceTree = "<group>"; };
+		51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaViewModel.swift; sourceTree = "<group>"; };
 		59C7D0EA292A3486F7FDCAD9 /* VideoItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoItem.swift; sourceTree = "<group>"; };
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F86 /* Formula1App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula1App.swift; sourceTree = "<group>"; };
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -186,6 +192,7 @@
 		5A21EBAC9FF94F37B877D08D /* RaceWinnerCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceWinnerCard.swift; sourceTree = "<group>"; };
 		5E0C9D4D97E04711B1E753FEBB677B0D /* PredictionCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredictionCard.swift; sourceTree = "<group>"; };
 		5EFE92D05BAA45848FACAD1F /* F1DBDriver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBDriver.swift; sourceTree = "<group>"; };
+		6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewsBannerCarousel.swift; sourceTree = "<group>"; };
 		663ABD3B43B7440C8A23CA77 /* F1DBGeography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBGeography.swift; sourceTree = "<group>"; };
 		6A41FCA0EDFB4C0E91AB8D0E /* JolpicaRaceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JolpicaRaceModels.swift; sourceTree = "<group>"; };
 		6FA90A8572823E4E34014010 /* F1DBService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBService.swift; sourceTree = "<group>"; };
@@ -215,6 +222,7 @@
 		E8FDD025F8274E66A1234E14 /* RaceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceHeaderView.swift; sourceTree = "<group>"; };
 		F777E148163C4341A8D87320 /* F1DBGrandPrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBGrandPrix.swift; sourceTree = "<group>"; };
 		F7874DDEC38B4E849C47BB59 /* F1DBSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBSeason.swift; sourceTree = "<group>"; };
+		FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaQuestion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +327,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E700B /* NewsArticle.swift */,
 				59C7D0EA292A3486F7FDCAD9 /* VideoItem.swift */,
 				96B3701DA2ADD37E61B2EBCA /* F1DB */,
+				FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -364,6 +373,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E700E /* ConstructorStandingsViewModel.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E700F /* NewsViewModel.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8027 /* ConstructorDetailViewModel.swift */,
+				51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -380,6 +390,8 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7012 /* NewsListView.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7014 /* SplashScreenView.swift */,
 				ABCDEF1234567890ABCDEF12 /* AISettingsView.swift */,
+				6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */,
+				04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -701,6 +713,10 @@
 				0D76980E63A444C6BFB342F0659F1FEB /* Summarizer.swift in Sources */,
 				5380FE6CB09149189910E0DAF954B431 /* PredictionCard.swift in Sources */,
 				F1E2D3C4B5A69876543210FE /* AISettingsView.swift in Sources */,
+				1F0E170C30E024B1ECB57C49 /* NewsBannerCarousel.swift in Sources */,
+				34A38111210049DBAE745702 /* TriviaQuestion.swift in Sources */,
+				6CD7DC3B4C5716EECE480545 /* TriviaViewModel.swift in Sources */,
+				8CA24E888037151A27F30EDE /* TriviaView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

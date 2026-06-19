@@ -60,6 +60,9 @@ struct RaceListView: View {
                         .frame(height: 4)
                         .padding(.horizontal, 16)
 
+                    NewsBannerCarousel()
+                        .padding(.bottom, 4)
+
                     if let next = races.first(where: { !$0.status.isCompleted }) {
                         heroCard(next)
                     }

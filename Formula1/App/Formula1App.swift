@@ -44,6 +44,10 @@ struct Formula1App: App {
                     coordinator.makeConstructorStandingsView()
                 case .news:
                     coordinator.makeNewsListView()
+                case .tickets, .store:
+                    coordinator.makeRaceListView()
+                case .trivia:
+                    TriviaView()
                 }
             }
             .toolbar {

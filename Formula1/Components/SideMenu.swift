@@ -134,8 +134,18 @@ struct SideMenu: View {
 
     private func menuRow(_ tab: SideMenuTab) -> some View {
         Button(action: {
-            selectedTab = tab
-            toggle()
+            if tab == .tickets {
+                guard let url = URL(string: "https://tickets.formula1.com") else { return }
+                UIApplication.shared.open(url)
+                toggle()
+            } else if tab == .store {
+                guard let url = URL(string: "https://f1store.formula1.com/en/?_s=bm-fi-f1-prtsite-home-content-block-cta-230625-blw") else { return }
+                UIApplication.shared.open(url)
+                toggle()
+            } else {
+                selectedTab = tab
+                toggle()
+            }
         }, label: {
             menuRowLabel(tab)
         })
@@ -148,7 +158,11 @@ struct SideMenu: View {
                 .font(.system(size: 16, weight: selectedTab == tab ? .bold : .medium, design: .rounded))
                 .foregroundColor(selectedTab == tab ? .white : .f1TextSecondary)
             Spacer()
-            if selectedTab == tab {
+            if tab == .tickets || tab == .store {
+                Image(systemName: "arrow.up.forward")
+                    .font(.system(size: 11, weight: .semibold))
+                    .foregroundColor(.f1TextMuted)
+            } else if selectedTab == tab {
                 Capsule()
                     .fill(Color.f1Accent)
                     .frame(width: 4, height: 20)
@@ -230,6 +244,9 @@ enum SideMenuTab: String, CaseIterable {
     case drivers
     case constructors
     case news
+    case trivia
+    case tickets
+    case store
 
     var title: String {
         switch self {
@@ -237,6 +254,9 @@ enum SideMenuTab: String, CaseIterable {
         case .drivers: return Strings.SideMenu.drivers
         case .constructors: return Strings.SideMenu.constructors
         case .news: return Strings.SideMenu.news
+        case .tickets: return Strings.SideMenu.tickets
+        case .store: return Strings.SideMenu.store
+        case .trivia: return Strings.SideMenu.trivia
         }
     }
 
@@ -246,6 +266,9 @@ enum SideMenuTab: String, CaseIterable {
         case .drivers: return "person.3.fill"
         case .constructors: return "wrench.and.screwdriver.fill"
         case .news: return "newspaper.fill"
+        case .tickets: return "ticket.fill"
+        case .store: return "bag.fill"
+        case .trivia: return "brain.head.profile"
         }
     }
 }

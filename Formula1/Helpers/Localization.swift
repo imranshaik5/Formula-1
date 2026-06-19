@@ -148,6 +148,25 @@ enum Strings {
         static let openArticle = NSLocalizedString("news_list.open_article", value: "Open Article", comment: "Article card footer link")
     }
 
+    enum Trivia {
+        static let title = NSLocalizedString("trivia.title", value: "Trivia", comment: "Trivia navigation title")
+        static let startTitle = NSLocalizedString("trivia.start_title", value: "F1 Trivia Challenge", comment: "Start screen title")
+        static let startDescription = NSLocalizedString("trivia.start_description", value: "Test your Formula 1 knowledge with 10 questions covering history, drivers, circuits, and records.", comment: "Start screen description")
+        static let startButton = NSLocalizedString("trivia.start_button", value: "Start Quiz", comment: "Start button")
+        static func questionLabel(_ current: Int, _ total: Int) -> String {
+            String(format: NSLocalizedString("trivia.question_label", value: "Question %d of %d", comment: "Question progress"), current, total)
+        }
+        static let nextQuestion = NSLocalizedString("trivia.next_question", value: "Next Question", comment: "Next question button")
+        static let seeResults = NSLocalizedString("trivia.see_results", value: "See Results", comment: "See results button")
+        static let resultTitle = NSLocalizedString("trivia.result_title", value: "Quiz Complete!", comment: "Results title")
+        static let playAgain = NSLocalizedString("trivia.play_again", value: "Play Again", comment: "Play again button")
+        static let goHome = NSLocalizedString("trivia.go_home", value: "Back to Start", comment: "Go home button")
+        static let messagePerfect = NSLocalizedString("trivia.message_perfect", value: "Perfect score! You're an F1 expert!", comment: "Perfect score message")
+        static let messageGreat = NSLocalizedString("trivia.message_great", value: "Great job! You really know your F1!", comment: "Great score message")
+        static let messageGood = NSLocalizedString("trivia.message_good", value: "Not bad! Brush up on your F1 knowledge.", comment: "Good score message")
+        static let messageTryAgain = NSLocalizedString("trivia.message_try_again", value: "Time to study up! Try again!", comment: "Low score message")
+    }
+
     enum Splash {
         static let formula1 = NSLocalizedString("splash.formula1", value: "FORMULA 1", comment: "Brand wordmark subtitle")
         static let startEngines = NSLocalizedString("splash.start_engines", value: "START YOUR ENGINES", comment: "Primary CTA tagline")
@@ -198,6 +217,9 @@ enum Strings {
         static let drivers = NSLocalizedString("sidemenu.drivers", value: "Drivers", comment: "Tab title")
         static let constructors = NSLocalizedString("sidemenu.constructors", value: "Constructors", comment: "Tab title")
         static let news = NSLocalizedString("sidemenu.news", value: "News", comment: "Tab title")
+        static let tickets = NSLocalizedString("sidemenu.tickets", value: "F1 Tickets", comment: "Tab title")
+        static let store = NSLocalizedString("sidemenu.store", value: "F1 Store", comment: "Tab title")
+        static let trivia = NSLocalizedString("sidemenu.trivia", value: "Trivia", comment: "Tab title")
     }
 
     enum ConstructorStandings {
