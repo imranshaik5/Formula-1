@@ -17,25 +17,30 @@ final class F1DBService: ObservableObject {
 
     private let cacheURL: URL
 
+    private lazy var loadTask: Task<Void, Never> = {
+        Task { [weak self] in
+            await self?.loadAsync()
+        }
+    }()
+
     init() {
         let caches = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
         cacheURL = caches.appendingPathComponent("f1db-cache.json")
-        loadSynchronously()
     }
 
-    private func loadSynchronously() {
-        isLoading = true
-        defer { isLoading = false }
+    private func loadAsync() async {
+        await MainActor.run { isLoading = true }
 
         guard let url = Bundle.main.url(forResource: "f1db", withExtension: "json") else {
-            error = F1DBError.bundleNotFound
+            await MainActor.run { error = F1DBError.bundleNotFound; isLoading = false }
             return
         }
 
         do {
-            let data = try Data(contentsOf: url)
-            let decoder = JSONDecoder()
-            let root = try decoder.decode(F1DBRoot.self, from: data)
+            let root = try await Task.detached(priority: .background) {
+                let data = try Data(contentsOf: url)
+                return try JSONDecoder().decode(F1DBRoot.self, from: data)
+            }.value
 
             driversByID = Dictionary(uniqueKeysWithValues: root.drivers.map { ($0.id, $0) })
             constructorsByID = Dictionary(uniqueKeysWithValues: root.constructors.map { ($0.id, $0) })
@@ -54,8 +59,9 @@ final class F1DBService: ObservableObject {
             }
 
             isLoaded = true
+            isLoading = false
         } catch {
-            self.error = error
+            await MainActor.run { self.error = error; isLoading = false }
         }
     }
 

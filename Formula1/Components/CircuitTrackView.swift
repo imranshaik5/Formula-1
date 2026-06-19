@@ -9,9 +9,7 @@ struct CircuitTrackView: UIViewRepresentable {
         let config = WKWebViewConfiguration()
         config.allowsInlineMediaPlayback = false
         config.websiteDataStore = .nonPersistent()
-        let preferences = WKPreferences()
-        preferences.javaScriptEnabled = false
-        config.preferences = preferences
+        config.defaultWebpagePreferences.allowsContentJavaScript = false
         if #available(iOS 17.0, *) {
             config.upgradeKnownHostsToHTTPS = false
         }
