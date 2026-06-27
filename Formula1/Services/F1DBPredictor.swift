@@ -33,7 +33,7 @@ struct F1DBPredictor {
         let circuitId = race?.circuitId
         let circuit = circuitId.flatMap { f1db.circuit(id: $0) }
 
-        let activeDrivers: [F1DBDriver]
+        var activeDrivers: [F1DBDriver] = []
         let driverStandings: [F1DBSeasonDriverStanding]
         var teamMap: [String: String]
 
