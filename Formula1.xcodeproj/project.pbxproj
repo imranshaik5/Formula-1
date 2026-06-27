@@ -118,6 +118,10 @@
 		F33F611ADF8B4C57A1371571 /* F1DBGeography.swift in Sources */ = {isa = PBXBuildFile; fileRef = 663ABD3B43B7440C8A23CA77 /* F1DBGeography.swift */; };
 		F51AB33CBF4B4CC4A993F67D /* RaceWinnerCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A21EBAC9FF94F37B877D08D /* RaceWinnerCard.swift */; };
 		FA0688E38AC36817F60398F7 /* Formula1UITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E238ECDA8437A1CDE8EE5DFF /* Formula1UITestsLaunchTests.swift */; };
+		EC0A02E92908A2F91F16 /* DebugSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A95D7BA38925DB7E7E3E /* DebugSettingsTests.swift */; };
+		3D03101940AA8EBCDF05 /* LiveRaceModelsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70A5803DA2B752BB571 /* LiveRaceModelsTests.swift */; };
+		9404A6B4169FE15EBC66 /* MockLiveTimingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B483AA517D33876828A /* MockLiveTimingServiceTests.swift */; };
+		2ECD4F8F6251585153C7 /* LiveRaceViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C14A9346B06AA417623 /* LiveRaceViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,10 @@
 			files = (
 				81920A0AF5D529B5A7810752 /* Formula1WidgetExtension.appex in Embed App Extensions */,
 			);
+
+
+
+
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +273,10 @@
 		F777E148163C4341A8D87320 /* F1DBGrandPrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBGrandPrix.swift; sourceTree = "<group>"; };
 		F7874DDEC38B4E849C47BB59 /* F1DBSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBSeason.swift; sourceTree = "<group>"; };
 		FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaQuestion.swift; sourceTree = "<group>"; };
+		A95D7BA38925DB7E7E3E /* DebugSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DebugSettingsTests.swift; sourceTree = "<group>"; };
+		A70A5803DA2B752BB571 /* LiveRaceModelsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRaceModelsTests.swift; sourceTree = "<group>"; };
+		1B483AA517D33876828A /* MockLiveTimingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockLiveTimingServiceTests.swift; sourceTree = "<group>"; };
+		0C14A9346B06AA417623 /* LiveRaceViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRaceViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -301,6 +313,10 @@
 				12F01235E4917CBFE82FD5ED /* F1DBServiceTests.swift */,
 				BD735C9EFDD6F3FC324D8353 /* F1DBPredictorTests.swift */,
 				23CE0E3EC4BEDD6FA3E0A0A7 /* F1DBModelDecodingTests.swift */,
+				A95D7BA38925DB7E7E3E /* DebugSettingsTests.swift */,
+				A70A5803DA2B752BB571 /* LiveRaceModelsTests.swift */,
+				1B483AA517D33876828A /* MockLiveTimingServiceTests.swift */,
+				0C14A9346B06AA417623 /* LiveRaceViewModelTests.swift */,
 			);
 			path = Formula1Tests;
 			sourceTree = "<group>";
@@ -763,6 +779,10 @@
 				D5C6E5D76E88022EC4C51DAC /* F1DBServiceTests.swift in Sources */,
 				96DFEACB37DAEF0D3E1546CB /* F1DBPredictorTests.swift in Sources */,
 				B33638D79F5FB082EFCC608F /* F1DBModelDecodingTests.swift in Sources */,
+				EC0A02E92908A2F91F16 /* DebugSettingsTests.swift in Sources */,
+				3D03101940AA8EBCDF05 /* LiveRaceModelsTests.swift in Sources */,
+				9404A6B4169FE15EBC66 /* MockLiveTimingServiceTests.swift in Sources */,
+				2ECD4F8F6251585153C7 /* LiveRaceViewModelTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
