@@ -4,9 +4,9 @@ import Foundation
 
 struct DebugSettingsTests {
     init() {
-        let settings = DebugSettingsStore.shared
-        settings.mockModeEnabled = false
-        settings.forceLiveRace = false
+        let defaults = UserDefaults.standard
+        defaults.removeObject(forKey: "debug_mockMode")
+        defaults.removeObject(forKey: "debug_forceLive")
     }
 
     @Test func defaultsAreCorrect() {
@@ -33,6 +33,8 @@ struct DebugSettingsTests {
 
     @Test func togglesAreIndependent() {
         let settings = DebugSettingsStore.shared
+        settings.mockModeEnabled = false
+        settings.forceLiveRace = false
         settings.mockModeEnabled = true
         settings.forceLiveRace = true
         #expect(settings.mockModeEnabled)

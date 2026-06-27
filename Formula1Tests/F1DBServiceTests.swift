@@ -9,11 +9,15 @@ final class F1DBServiceTests: XCTestCase {
     override func setUp() async throws {
         service = F1DBService.shared
         service.ensureLoaded()
-        try await Task.sleep(for: .seconds(1))
+        let start = Date()
+        while service.isLoading && Date().timeIntervalSince(start) < 10 {
+            try await Task.sleep(for: .milliseconds(100))
+        }
     }
 
     func testServiceLazyLoads() {
         XCTAssertFalse(service.isLoading)
+        XCTAssertTrue(service.isLoaded)
     }
 
     func testDriverQueryReturnsNilForUnknownID() {

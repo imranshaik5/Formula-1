@@ -29,10 +29,10 @@ final class MockLiveTimingService: LiveTimingServiceProtocol {
     func connect() {
         guard !_isActive else { return }
         _isActive = true
-        generateSnapshot()
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { [weak self] _ in
             self?.generateSnapshot()
         }
+        generateSnapshot()
     }
 
     func disconnect() {
@@ -42,6 +42,7 @@ final class MockLiveTimingService: LiveTimingServiceProtocol {
     }
 
     private func generateSnapshot() {
+        guard _isActive else { return }
         cycle += 1
         let cyc = cycle
 
