@@ -247,6 +247,7 @@ enum SideMenuTab: String, CaseIterable {
     case trivia
     case tickets
     case store
+    case debug
 
     var title: String {
         switch self {
@@ -257,6 +258,7 @@ enum SideMenuTab: String, CaseIterable {
         case .tickets: return Strings.SideMenu.tickets
         case .store: return Strings.SideMenu.store
         case .trivia: return Strings.SideMenu.trivia
+        case .debug: return Strings.SideMenu.debug
         }
     }
 
@@ -269,6 +271,7 @@ enum SideMenuTab: String, CaseIterable {
         case .tickets: return "ticket.fill"
         case .store: return "bag.fill"
         case .trivia: return "brain.head.profile"
+        case .debug: return "wrench.adjustable.fill"
         }
     }
 }

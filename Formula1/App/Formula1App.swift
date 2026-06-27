@@ -25,6 +25,7 @@ struct Formula1App: App {
                 .environmentObject(coordinator)
                 .environmentObject(f1dbService)
                 .environmentObject(AIConfigStore.shared)
+                .environmentObject(DebugSettingsStore.shared)
                 .preferredColorScheme(.dark)
                 .transition(.opacity)
             }
@@ -48,6 +49,8 @@ struct Formula1App: App {
                     coordinator.makeRaceListView()
                 case .trivia:
                     TriviaView()
+                case .debug:
+                    DebugSettingsView()
                 }
             }
             .toolbar {

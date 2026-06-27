@@ -181,6 +181,24 @@ enum Strings {
         static let sec = NSLocalizedString("countdown.sec", value: "sec", comment: "Seconds unit")
     }
 
+    enum LiveTiming {
+        static let connecting = NSLocalizedString("livetiming.connecting", value: "Connecting to live timing...", comment: "Connecting state")
+        static let pos = NSLocalizedString("livetiming.pos", value: "POS", comment: "Table header position")
+        static let driver = NSLocalizedString("livetiming.driver", value: "DRIVER", comment: "Table header driver")
+        static let gap = NSLocalizedString("livetiming.gap", value: "GAP", comment: "Table header gap to front")
+        static let interval = NSLocalizedString("livetiming.interval", value: "INT", comment: "Table header interval")
+        static let lap = NSLocalizedString("livetiming.lap", value: "LAP", comment: "Table header lap time")
+        static let fastestLap = NSLocalizedString("livetiming.fastest_lap", value: "FASTEST LAP", comment: "Fastest lap indicator")
+        static let greenFlag = NSLocalizedString("livetiming.green_flag", value: "GREEN", comment: "Green flag status")
+        static let yellowFlag = NSLocalizedString("livetiming.yellow_flag", value: "YELLOW", comment: "Yellow flag status")
+        static let safetyCar = NSLocalizedString("livetiming.safety_car", value: "SAFETY CAR", comment: "Safety car status")
+        static let redFlag = NSLocalizedString("livetiming.red_flag", value: "RED FLAG", comment: "Red flag status")
+        static let vsc = NSLocalizedString("livetiming.vsc", value: "VSC", comment: "Virtual safety car status")
+        static let lapPrefix = NSLocalizedString("livetiming.lap_prefix", value: "Lap", comment: "Lap prefix in header")
+        static let airTemp = NSLocalizedString("livetiming.air_temp", value: "Air", comment: "Air temperature")
+        static let trackTemp = NSLocalizedString("livetiming.track_temp", value: "Track", comment: "Track temperature")
+    }
+
     enum Podium {
         static func position(_ number: Int) -> String {
             String(format: NSLocalizedString("podium.position", value: "#%d", comment: "Podium position prefix"), number)
@@ -220,6 +238,23 @@ enum Strings {
         static let tickets = NSLocalizedString("sidemenu.tickets", value: "F1 Tickets", comment: "Tab title")
         static let store = NSLocalizedString("sidemenu.store", value: "F1 Store", comment: "Tab title")
         static let trivia = NSLocalizedString("sidemenu.trivia", value: "Trivia", comment: "Tab title")
+        static let debug = NSLocalizedString("sidemenu.debug", value: "Debug", comment: "Tab title")
+    }
+
+    enum Debug {
+        static let title = NSLocalizedString("debug.title", value: "Debug Settings", comment: "Navigation title")
+        static let header = NSLocalizedString("debug.header", value: "Developer Settings", comment: "Section header")
+        static let subtitle = NSLocalizedString("debug.subtitle", value: "Configure mock data and testing options", comment: "Section subtitle")
+        static let mockSection = NSLocalizedString("debug.mock_section", value: "Mock Data", comment: "Section label")
+        static let mockMode = NSLocalizedString("debug.mock_mode", value: "Mock Mode", comment: "Toggle label")
+        static let mockModeDetail = NSLocalizedString("debug.mock_mode_detail", value: "Use local mock data instead of live server", comment: "Toggle detail")
+        static let forceLive = NSLocalizedString("debug.force_live", value: "Force Live", comment: "Toggle label")
+        static let forceLiveDetail = NSLocalizedString("debug.force_live_detail", value: "Show any race as live for testing", comment: "Toggle detail")
+        static let restartNote = NSLocalizedString("debug.restart_note", value: "Reopen the race detail view for changes to take effect", comment: "Restart note")
+        static let serverSection = NSLocalizedString("debug.server_section", value: "Server", comment: "Section label")
+        static let mockServerStatus = NSLocalizedString("debug.mock_server_status", value: "Mock data active (local)", comment: "Server status")
+        static let serverStatusIdle = NSLocalizedString("debug.server_status_idle", value: "Not connected to mock server", comment: "Server status")
+        static let serverNote = NSLocalizedString("debug.server_note", value: "Mock mode generates data locally in the app. No Python server needed.", comment: "Server note")
     }
 
     enum ConstructorStandings {

@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		03C99DDFBBB6347E8A70453A /* LiveRaceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73D9102407450AD7639934B7 /* LiveRaceViewModel.swift */; };
 		044E3CFA6B82468DB99AEFFDD956332D /* LoadState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 941B78C05C4749999B91D7CD9BF3A012 /* LoadState.swift */; };
 		048E16CC380B47B19B3752E432AD7C36 /* PreviewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEDBA1957C4C4884924772ED4E076027 /* PreviewWrapper.swift */; };
 		0D76980E63A444C6BFB342F0659F1FEB /* Summarizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12A7C1EB2B7402F822BFF45BFB429F5 /* Summarizer.swift */; };
 		15B0BB1EC19911A3F447DEC7 /* F1DBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FA90A8572823E4E34014010 /* F1DBService.swift */; };
 		1DECB60D746443E6A1658126 /* F1DBRace.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC1170FA7E14480A923883E9 /* F1DBRace.swift */; };
+		1E4E4981F57695263D634FEF /* WidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 943DC626C4116CA85A8FA6A2 /* WidgetViews.swift */; };
 		1F0E170C30E024B1ECB57C49 /* NewsBannerCarousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */; };
 		2016E6C6DFAA5FAE94A11EB9 /* F1DBService+Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46735E2E28FE653C6217EBD4 /* F1DBService+Shared.swift */; };
+		2C6A78EC22517746C9D78D5C /* DebugSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C99B942CFD21205CC23BB04 /* DebugSettingsView.swift */; };
 		34A38111210049DBAE745702 /* TriviaQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */; };
+		36D532DDEA47F3DCA3F9069A /* LiveRaceModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C313F4B3912CDD137906431 /* LiveRaceModels.swift */; };
+		370CD080532E6E8295BFB5B1 /* WidgetDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45117A31586F0A10B087B898 /* WidgetDataService.swift */; };
 		376564B717DD4FFD9B59E7EB /* F1DBSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDDC635F866047BD9287A336 /* F1DBSupport.swift */; };
+		379D7AB451CFE80173F7E246 /* LiveRaceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931F82EE6F99185D295CDF7D /* LiveRaceView.swift */; };
+		45BA552C3164EA8EE35C7820 /* Formula1Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C68B95A29734C282B426054D /* Formula1Widget.swift */; };
 		4790EB1256454B7BA15C9664 /* F1DBCircuit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70FD5A3A19144A0D8BD99F02 /* F1DBCircuit.swift */; };
 		4B489330B49C4B31AF038FE0 /* RaceResultsTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B133B127D0D7441EB8B26FCA /* RaceResultsTable.swift */; };
 		4B5D2043F5474904B5828382 /* RaceCircuitView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60EB6FDF2B649AE8F874FA5 /* RaceCircuitView.swift */; };
 		5380FE6CB09149189910E0DAF954B431 /* PredictionCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0C9D4D97E04711B1E753FEBB677B0D /* PredictionCard.swift */; };
+		53A5B011B88218FDC4D73931 /* DebugSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 302A6B727FB58CD24AC6B6FD /* DebugSettings.swift */; };
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F90 /* Formula1App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F86 /* Formula1App.swift */; };
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F92 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F88 /* Assets.xcassets */; };
 		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F93 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F89 /* Preview Assets.xcassets */; };
@@ -73,9 +81,12 @@
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8028 /* ConstructorDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E8027 /* ConstructorDetailViewModel.swift */; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8029 /* SideMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E7025 /* SideMenu.swift */; };
 		5A0D1B6A2F1D4F1A8E1A2B3C4D5E8032 /* f1db.json in Resources */ = {isa = PBXBuildFile; fileRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E8031 /* f1db.json */; };
+		6CC3FBD63DB4DDE27BDC5DC4 /* MockLiveTimingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E85F1875BEA5E0544102D703 /* MockLiveTimingService.swift */; };
 		6CD7DC3B4C5716EECE480545 /* TriviaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */; };
 		70D40457003341489AE01566 /* F1DBSeason.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7874DDEC38B4E849C47BB59 /* F1DBSeason.swift */; };
 		7FF3FD8FC48C4CDF89FA50D8 /* F1DBRoot.swift in Sources */ = {isa = PBXBuildFile; fileRef = D646E0D59414418AB3550D5A /* F1DBRoot.swift */; };
+		8095BA10A496CE05CE10F61C /* LiveTimingServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BA5C29557C8266567ECEA0A /* LiveTimingServiceProtocol.swift */; };
+		81920A0AF5D529B5A7810752 /* Formula1WidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = E4FFB3F1D34471090ADD7D05 /* Formula1WidgetExtension.appex */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		82A246781F1A494591F6CA07 /* F1DBConstructor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5473D6B77584860A8FF334D /* F1DBConstructor.swift */; };
 		8913A26D05334012A7E3D52B /* F1DBDriver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EFE92D05BAA45848FACAD1F /* F1DBDriver.swift */; };
 		8A64CB41699449DFAE255AE8 /* RaceGridComparisonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DC427D354D14DEA8CF7481D /* RaceGridComparisonView.swift */; };
@@ -83,11 +94,15 @@
 		8CA24E888037151A27F30EDE /* TriviaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */; };
 		965E7A4BAB7743D9A73ECEF85A3CDCCE /* F1DBPredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FFFB7F0A1DC474B930C7C0192C5A1BB /* F1DBPredictor.swift */; };
 		96DFEACB37DAEF0D3E1546CB /* F1DBPredictorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD735C9EFDD6F3FC324D8353 /* F1DBPredictorTests.swift */; };
+		9C5544CD7974277B7B1466A6 /* LiveTimingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29A10A46251847B1B9E877B3 /* LiveTimingService.swift */; };
 		9E8A7B6C5D4E3F2A1B0C9D8E /* AIPredictionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A2B3C4D5E6F7890ABCDEF12 /* AIPredictionService.swift */; };
 		A293D2DF1E984865BA85A69A /* RaceMediaSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D003F95F11BA43CEB4C576F5 /* RaceMediaSection.swift */; };
 		A3D359D7759A47F0909E75FC /* F1DBGrandPrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = F777E148163C4341A8D87320 /* F1DBGrandPrix.swift */; };
 		A84466CE15A0CC84538FD987 /* F1DBDriverSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11A3DF8628B40E3762695FFD /* F1DBDriverSections.swift */; };
 		AAF98A15AF8245E69841C0E3 /* RaceDetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E0592F747FB44FBA210CFEA /* RaceDetailsCard.swift */; };
+		B11E745E2FE5F53200AC6206 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E9001 /* Kingfisher */; };
+		B11E745F2FE5F53200AC6206 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E9003 /* Alamofire */; };
+		B11E74602FE5F53200AC6206 /* FeedKit in Frameworks */ = {isa = PBXBuildFile; productRef = 5A0D1B6A2F1D4F1A8E1A2B3C4D5E9005 /* FeedKit */; };
 		B33638D79F5FB082EFCC608F /* F1DBModelDecodingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23CE0E3EC4BEDD6FA3E0A0A7 /* F1DBModelDecodingTests.swift */; };
 		B8863F1171CB0611B5E00903 /* F1DBRaceSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = CFD2961AD3C29E345CB4812E /* F1DBRaceSections.swift */; };
 		BD37B6ACBE084E8DADFC5E7D /* JolpicaStandingsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = A300C5065B474CFB84D1C6AB /* JolpicaStandingsModels.swift */; };
@@ -122,6 +137,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		75B468B9C2CA014D4975C542 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				81920A0AF5D529B5A7810752 /* Formula1WidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaView.swift; sourceTree = "<group>"; };
 		0DC427D354D14DEA8CF7481D /* RaceGridComparisonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceGridComparisonView.swift; sourceTree = "<group>"; };
@@ -129,8 +158,12 @@
 		11A3DF8628B40E3762695FFD /* F1DBDriverSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBDriverSections.swift; sourceTree = "<group>"; };
 		12F01235E4917CBFE82FD5ED /* F1DBServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBServiceTests.swift; sourceTree = "<group>"; };
 		1A2B3C4D5E6F7890ABCDEF12 /* AIPredictionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIPredictionService.swift; sourceTree = "<group>"; };
+		1BA5C29557C8266567ECEA0A /* LiveTimingServiceProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveTimingServiceProtocol.swift; sourceTree = "<group>"; };
 		23CE0E3EC4BEDD6FA3E0A0A7 /* F1DBModelDecodingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBModelDecodingTests.swift; sourceTree = "<group>"; };
+		29A10A46251847B1B9E877B3 /* LiveTimingService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveTimingService.swift; sourceTree = "<group>"; };
+		302A6B727FB58CD24AC6B6FD /* DebugSettings.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugSettings.swift; path = DebugSettings.swift; sourceTree = "<group>"; };
 		35A8326658B316E7B1829E12 /* YouTubeService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = YouTubeService.swift; sourceTree = "<group>"; };
+		45117A31586F0A10B087B898 /* WidgetDataService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetDataService.swift; sourceTree = "<group>"; };
 		46735E2E28FE653C6217EBD4 /* F1DBService+Shared.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "F1DBService+Shared.swift"; sourceTree = "<group>"; };
 		51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = TriviaViewModel.swift; sourceTree = "<group>"; };
 		59C7D0EA292A3486F7FDCAD9 /* VideoItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = VideoItem.swift; sourceTree = "<group>"; };
@@ -195,30 +228,39 @@
 		6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = NewsBannerCarousel.swift; sourceTree = "<group>"; };
 		663ABD3B43B7440C8A23CA77 /* F1DBGeography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBGeography.swift; sourceTree = "<group>"; };
 		6A41FCA0EDFB4C0E91AB8D0E /* JolpicaRaceModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JolpicaRaceModels.swift; sourceTree = "<group>"; };
+		6C313F4B3912CDD137906431 /* LiveRaceModels.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveRaceModels.swift; sourceTree = "<group>"; };
+		6C99B942CFD21205CC23BB04 /* DebugSettingsView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DebugSettingsView.swift; path = DebugSettingsView.swift; sourceTree = "<group>"; };
 		6FA90A8572823E4E34014010 /* F1DBService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBService.swift; sourceTree = "<group>"; };
 		6FFFB7F0A1DC474B930C7C0192C5A1BB /* F1DBPredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBPredictor.swift; sourceTree = "<group>"; };
 		70FD5A3A19144A0D8BD99F02 /* F1DBCircuit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBCircuit.swift; sourceTree = "<group>"; };
+		73D9102407450AD7639934B7 /* LiveRaceViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveRaceViewModel.swift; sourceTree = "<group>"; };
 		73EAE29F39564B57AB6558D5 /* RaceFastestLapCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceFastestLapCard.swift; sourceTree = "<group>"; };
 		8DE544288C753CDF8495FC85 /* Formula1Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Formula1Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		931F82EE6F99185D295CDF7D /* LiveRaceView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = LiveRaceView.swift; sourceTree = "<group>"; };
 		941B78C05C4749999B91D7CD9BF3A012 /* LoadState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadState.swift; sourceTree = "<group>"; };
+		943DC626C4116CA85A8FA6A2 /* WidgetViews.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WidgetViews.swift; sourceTree = "<group>"; };
 		9A2DABF96439E66F9759928D /* F1DBConstructorSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBConstructorSections.swift; sourceTree = "<group>"; };
 		9F39564C7D3DBCEC29BFCDB2 /* Formula1UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula1UITests.swift; sourceTree = "<group>"; };
 		A12A7C1EB2B7402F822BFF45BFB429F5 /* Summarizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summarizer.swift; sourceTree = "<group>"; };
 		A300C5065B474CFB84D1C6AB /* JolpicaStandingsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JolpicaStandingsModels.swift; sourceTree = "<group>"; };
 		A5473D6B77584860A8FF334D /* F1DBConstructor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBConstructor.swift; sourceTree = "<group>"; };
+		AB811BBAF758D9FB62AAC47C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABCDEF1234567890ABCDEF12 /* AISettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AISettingsView.swift; sourceTree = "<group>"; };
 		B133B127D0D7441EB8B26FCA /* RaceResultsTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceResultsTable.swift; sourceTree = "<group>"; };
 		BD735C9EFDD6F3FC324D8353 /* F1DBPredictorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBPredictorTests.swift; sourceTree = "<group>"; };
 		BDDC635F866047BD9287A336 /* F1DBSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBSupport.swift; sourceTree = "<group>"; };
 		BEDBA1957C4C4884924772ED4E076027 /* PreviewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewWrapper.swift; sourceTree = "<group>"; };
+		C68B95A29734C282B426054D /* Formula1Widget.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Formula1Widget.swift; sourceTree = "<group>"; };
 		CFD2961AD3C29E345CB4812E /* F1DBRaceSections.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = F1DBRaceSections.swift; sourceTree = "<group>"; };
 		D003F95F11BA43CEB4C576F5 /* RaceMediaSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceMediaSection.swift; sourceTree = "<group>"; };
 		D10BB4CF3AB34BAABE295ACFA439F977 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		D60EB6FDF2B649AE8F874FA5 /* RaceCircuitView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceCircuitView.swift; sourceTree = "<group>"; };
 		D646E0D59414418AB3550D5A /* F1DBRoot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBRoot.swift; sourceTree = "<group>"; };
-		D6E06B723C10A27C13EC114F /* Formula1UITests-Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Formula1UITests-Runner.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6E06B723C10A27C13EC114F /* Formula1UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Formula1UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1170FA7E14480A923883E9 /* F1DBRace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBRace.swift; sourceTree = "<group>"; };
 		E238ECDA8437A1CDE8EE5DFF /* Formula1UITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formula1UITestsLaunchTests.swift; sourceTree = "<group>"; };
+		E4FFB3F1D34471090ADD7D05 /* Formula1WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; name = Formula1WidgetExtension.appex; path = Formula1WidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E85F1875BEA5E0544102D703 /* MockLiveTimingService.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MockLiveTimingService.swift; path = MockLiveTimingService.swift; sourceTree = "<group>"; };
 		E8FDD025F8274E66A1234E14 /* RaceHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RaceHeaderView.swift; sourceTree = "<group>"; };
 		F777E148163C4341A8D87320 /* F1DBGrandPrix.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBGrandPrix.swift; sourceTree = "<group>"; };
 		F7874DDEC38B4E849C47BB59 /* F1DBSeason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = F1DBSeason.swift; sourceTree = "<group>"; };
@@ -226,16 +268,33 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7D /* Frameworks */ = {
+		04A1BE85AA104CB6F3FAC51A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B11E74602FE5F53200AC6206 /* FeedKit in Frameworks */,
+				B11E745F2FE5F53200AC6206 /* Alamofire in Frameworks */,
+				B11E745E2FE5F53200AC6206 /* Kingfisher in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11E9973EFE9869E5CED679C6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		2FE51889FDB631F78EA96B33 /* Formula1Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,6 +328,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E6001 /* Components */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E6002 /* Helpers */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6FA7 /* Resources */,
+				DD7D4713FFCFCF847C31B5DB /* Formula1Widget */,
 			);
 			path = Formula1;
 			sourceTree = "<group>";
@@ -288,6 +348,11 @@
 				2FE51889FDB631F78EA96B33 /* Formula1Tests */,
 				47BADA0C91D65C297C13AA5A /* Formula1UITests */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F8E /* Products */,
+				7A648A9AF5FC13C3112A25D6 /* Models */,
+				91182A4D1DFABDAACD72B4F2 /* Protocols */,
+				D30E220E3AEEE5723A32C5F9 /* Services */,
+				843A51824FA70366F1F23D12 /* ViewModels */,
+				11E9973EFE9869E5CED679C6 /* Views */,
 			);
 			sourceTree = "<group>";
 		};
@@ -296,7 +361,8 @@
 			children = (
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F8F /* Formula1.app */,
 				8DE544288C753CDF8495FC85 /* Formula1Tests.xctest */,
-				D6E06B723C10A27C13EC114F /* Formula1UITests-Runner.app */,
+				D6E06B723C10A27C13EC114F /* Formula1UITests.xctest */,
+				E4FFB3F1D34471090ADD7D05 /* Formula1WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -328,6 +394,7 @@
 				59C7D0EA292A3486F7FDCAD9 /* VideoItem.swift */,
 				96B3701DA2ADD37E61B2EBCA /* F1DB */,
 				FA9B59BDCD826BD54A41FC86 /* TriviaQuestion.swift */,
+				6C313F4B3912CDD137906431 /* LiveRaceModels.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -340,6 +407,7 @@
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6FB5 /* DriverServiceProtocol.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E700C /* ConstructorServiceProtocol.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E7022 /* NewsServiceProtocol.swift */,
+				1BA5C29557C8266567ECEA0A /* LiveTimingServiceProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -359,6 +427,9 @@
 				A300C5065B474CFB84D1C6AB /* JolpicaStandingsModels.swift */,
 				6FFFB7F0A1DC474B930C7C0192C5A1BB /* F1DBPredictor.swift */,
 				1A2B3C4D5E6F7890ABCDEF12 /* AIPredictionService.swift */,
+				29A10A46251847B1B9E877B3 /* LiveTimingService.swift */,
+				302A6B727FB58CD24AC6B6FD /* DebugSettings.swift */,
+				E85F1875BEA5E0544102D703 /* MockLiveTimingService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -374,6 +445,7 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E700F /* NewsViewModel.swift */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8027 /* ConstructorDetailViewModel.swift */,
 				51EAE121B4F53C4040F08308 /* TriviaViewModel.swift */,
+				73D9102407450AD7639934B7 /* LiveRaceViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -392,6 +464,8 @@
 				ABCDEF1234567890ABCDEF12 /* AISettingsView.swift */,
 				6069364BAF68CDFA9A502D93 /* NewsBannerCarousel.swift */,
 				04C9DD3BD27FC3BB77EFE567 /* TriviaView.swift */,
+				931F82EE6F99185D295CDF7D /* LiveRaceView.swift */,
+				6C99B942CFD21205CC23BB04 /* DebugSettingsView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -462,6 +536,27 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		7A648A9AF5FC13C3112A25D6 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		843A51824FA70366F1F23D12 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		91182A4D1DFABDAACD72B4F2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		96B3701DA2ADD37E61B2EBCA /* F1DB */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,9 +574,45 @@
 			path = Formula1/Models/F1DB;
 			sourceTree = SOURCE_ROOT;
 		};
+		D30E220E3AEEE5723A32C5F9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		DD7D4713FFCFCF847C31B5DB /* Formula1Widget */ = {
+			isa = PBXGroup;
+			children = (
+				C68B95A29734C282B426054D /* Formula1Widget.swift */,
+				943DC626C4116CA85A8FA6A2 /* WidgetViews.swift */,
+				45117A31586F0A10B087B898 /* WidgetDataService.swift */,
+				AB811BBAF758D9FB62AAC47C /* Info.plist */,
+			);
+			name = Formula1Widget;
+			path = Formula1Widget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		03F495EDF5853E046A184AAB /* Formula1WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A9805EAD546EE28A5EF2715D /* Build configuration list for PBXNativeTarget "Formula1WidgetExtension" */;
+			buildPhases = (
+				850B550CA7CB4EE18B48D799 /* Sources */,
+				04A1BE85AA104CB6F3FAC51A /* Frameworks */,
+				D4C6912386FEA408764B0D52 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Formula1WidgetExtension;
+			productName = Formula1WidgetExtension;
+			productReference = E4FFB3F1D34471090ADD7D05 /* Formula1WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		057EAA5673BBC0600B3156D6 /* Formula1UITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 809EBE2F13362107C0DC573A /* Build configuration list for PBXNativeTarget "Formula1UITests" */;
@@ -496,7 +627,7 @@
 			);
 			name = Formula1UITests;
 			productName = Formula1UITests;
-			productReference = D6E06B723C10A27C13EC114F /* Formula1UITests-Runner.app */;
+			productReference = D6E06B723C10A27C13EC114F /* Formula1UITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		30E6A02DD0ABAA4ECE84DB40 /* Formula1Tests */ = {
@@ -523,10 +654,12 @@
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7C /* Sources */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7D /* Frameworks */,
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7E /* Resources */,
+				75B468B9C2CA014D4975C542 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				CC9B30100514E60B39832DBC /* PBXTargetDependency */,
 			);
 			name = Formula1;
 			packageProductDependencies = (
@@ -548,6 +681,12 @@
 				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
+					03F495EDF5853E046A184AAB = {
+						CreatedOnToolsVersion = 16.2;
+					};
+					057EAA5673BBC0600B3156D6 = {
+						TestTargetID = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7F;
+					};
 					5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7F = {
 						CreatedOnToolsVersion = 15.3;
 					};
@@ -574,6 +713,7 @@
 				5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7F /* Formula1 */,
 				30E6A02DD0ABAA4ECE84DB40 /* Formula1Tests */,
 				057EAA5673BBC0600B3156D6 /* Formula1UITests */,
+				03F495EDF5853E046A184AAB /* Formula1WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -596,6 +736,13 @@
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8019 /* Localizable.strings in Resources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8026 /* demo.mp4 in Resources */,
 				5A0D1B6A2F1D4F1A8E1A2B3C4D5E8032 /* f1db.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D4C6912386FEA408764B0D52 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -717,6 +864,24 @@
 				34A38111210049DBAE745702 /* TriviaQuestion.swift in Sources */,
 				6CD7DC3B4C5716EECE480545 /* TriviaViewModel.swift in Sources */,
 				8CA24E888037151A27F30EDE /* TriviaView.swift in Sources */,
+				36D532DDEA47F3DCA3F9069A /* LiveRaceModels.swift in Sources */,
+				8095BA10A496CE05CE10F61C /* LiveTimingServiceProtocol.swift in Sources */,
+				9C5544CD7974277B7B1466A6 /* LiveTimingService.swift in Sources */,
+				03C99DDFBBB6347E8A70453A /* LiveRaceViewModel.swift in Sources */,
+				379D7AB451CFE80173F7E246 /* LiveRaceView.swift in Sources */,
+				53A5B011B88218FDC4D73931 /* DebugSettings.swift in Sources */,
+				6CC3FBD63DB4DDE27BDC5DC4 /* MockLiveTimingService.swift in Sources */,
+				2C6A78EC22517746C9D78D5C /* DebugSettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		850B550CA7CB4EE18B48D799 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				45BA552C3164EA8EE35C7820 /* Formula1Widget.swift in Sources */,
+				1E4E4981F57695263D634FEF /* WidgetViews.swift in Sources */,
+				370CD080532E6E8295BFB5B1 /* WidgetDataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -728,6 +893,11 @@
 			target = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7F /* Formula1 */;
 			targetProxy = FA4373D828F58FA7AB98FB46 /* PBXContainerItemProxy */;
 		};
+		CC9B30100514E60B39832DBC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Formula1WidgetExtension;
+			target = 03F495EDF5853E046A184AAB /* Formula1WidgetExtension */;
+		};
 		F5D7489A2772DE140537F966 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 5A0D1B6A1F1D4F1A8E1A2B3C4D5E6F7F /* Formula1 */;
@@ -736,6 +906,33 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		368BAFEB7727243F86B15C95 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UTX632LP5;
+				INFOPLIST_FILE = Formula1/Formula1Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula 1";
+				INFOPLIST_KEY_CFBundleShortVersionString = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.formula1.app.widgetextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		417EED3DB32F36515532D686 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -844,22 +1041,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UTX632LP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Formula1/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula 1";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.formula1.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -868,22 +1068,25 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UTX632LP5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Formula1/Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula 1";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = NO;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.formula1.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -902,6 +1105,31 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Formula1.app/Formula1";
+			};
+			name = Debug;
+		};
+		B840182750D664E3C5DF309B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6UTX632LP5;
+				INFOPLIST_FILE = Formula1/Formula1Widget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "Formula 1";
+				INFOPLIST_KEY_CFBundleShortVersionString = "$(MARKETING_VERSION)";
+				INFOPLIST_KEY_CFBundleVersion = "$(CURRENT_PROJECT_VERSION)";
+				INFOPLIST_KEY_NSExtensionPointIdentifier = "com.apple.widgetkit-extension";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.formula1.app.widgetextension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -931,6 +1159,15 @@
 			buildConfigurations = (
 				5334F003249C7C37AB6E1C36 /* Debug */,
 				4E7901970327E897DAE7A862 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A9805EAD546EE28A5EF2715D /* Build configuration list for PBXNativeTarget "Formula1WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B840182750D664E3C5DF309B /* Debug */,
+				368BAFEB7727243F86B15C95 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

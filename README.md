@@ -73,6 +73,7 @@ Tap the gear icon on the "AI Predictions" card to enter your endpoint, API key, 
 
 - Full dark mode with `preferredColorScheme(.dark)`
 - Glassmorphism: `ultraThinMaterial` frosted panels, team-color gradient borders, carbon fiber background
+- **Glassmorphism deep dive** — Read the article [*Translucent Interfaces: How Glassmorphism is Shaping Modern iOS Design*](https://medium.com/@imranshaik5/translucent-interfaces-how-glassmorphism-is-shaping-modern-ios-design) for a full breakdown of the `GlassCard` component, material system, and design decisions
 - Per-team colors: Papaya (McLaren), Rosso Corsa (Ferrari), Teal (Mercedes), etc.
 - Watermarked rank numbers at 13% opacity behind driver cards
 - PTS monospaced numerals for standings positions with tracking(2)

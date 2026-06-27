@@ -146,6 +146,23 @@
 "constructor_detail.driver_contributions" = "Driver Contributions";
 "constructor_detail.no_race_data" = "No race data available";
 
+// Live Timing
+"livetiming.connecting" = "Connecting to live timing...";
+"livetiming.pos" = "POS";
+"livetiming.driver" = "DRIVER";
+"livetiming.gap" = "GAP";
+"livetiming.interval" = "INT";
+"livetiming.lap" = "LAP";
+"livetiming.fastest_lap" = "FASTEST LAP";
+"livetiming.green_flag" = "GREEN";
+"livetiming.yellow_flag" = "YELLOW";
+"livetiming.safety_car" = "SAFETY CAR";
+"livetiming.red_flag" = "RED FLAG";
+"livetiming.vsc" = "VSC";
+"livetiming.lap_prefix" = "Lap";
+"livetiming.air_temp" = "Air";
+"livetiming.track_temp" = "Track";
+
 // F1DB
 "f1db.all_time_stats" = "All-Time Stats";
 "f1db.all_time_career_stats" = "All-Time Career Stats";

@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RaceDetailView: View {
     @StateObject private var viewModel: RaceDetailViewModel
+    @StateObject private var liveViewModel: LiveRaceViewModel
     @EnvironmentObject private var f1dbService: F1DBService
     var onDriverTap: ((Driver) -> Void)?
 
@@ -28,6 +29,10 @@ struct RaceDetailView: View {
     init(viewModel: RaceDetailViewModel, onDriverTap: ((Driver) -> Void)? = nil) {
         _viewModel = StateObject(wrappedValue: viewModel)
         self.onDriverTap = onDriverTap
+        let service: LiveTimingServiceProtocol = DebugSettingsStore.shared.mockModeEnabled
+            ? MockLiveTimingService()
+            : LiveTimingService()
+        _liveViewModel = StateObject(wrappedValue: LiveRaceViewModel(timingService: service))
     }
 
     var body: some View {
@@ -184,20 +189,13 @@ struct RaceDetailView: View {
 
     @ViewBuilder
     private var statusSection: some View {
-        switch viewModel.race.status {
-        case .upcoming:
+        let debug = DebugSettingsStore.shared
+        if (debug.forceLiveRace && !viewModel.race.status.isCompleted) || viewModel.race.status.isLive {
+            LiveRaceView(viewModel: liveViewModel)
+        } else if viewModel.race.status.isUpcoming {
             CountdownView(targetDate: viewModel.race.date, title: Strings.RaceDetail.raceStartsIn)
                 .padding(.horizontal)
             predictionsSection
-        case .live:
-            GlassCard {
-                Label(Strings.RaceDetail.raceIsLive, systemImage: "play.fill")
-                    .font(F1Theme.headline)
-                    .foregroundColor(.f1Accent)
-            }
-            .padding(.horizontal)
-        case .completed:
-            EmptyView()
         }
     }
 
