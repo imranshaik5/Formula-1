@@ -35,15 +35,40 @@ Tap the gear icon on the "AI Predictions" card to enter your endpoint, API key, 
 ## Architecture
 
 - **MVVM + Coordinator** — Views observe ViewModels; AppCoordinator manages navigation stack
-- **Protocol-oriented services** — `RaceServiceProtocol`, `DriverServiceProtocol`, `ConstructorServiceProtocol`, `NewsServiceProtocol`
+- **Protocol-oriented services** — `RaceServiceProtocol`, `DriverServiceProtocol`, `ConstructorServiceProtocol`, `NewsServiceProtocol`, `LiveTimingServiceProtocol`
 - **Dark design system** — `F1Theme` (colors, fonts, spacing) and `F1TeamColor` (per-team hex codes)
+
+### Live Race Tracking
+
+- **Live tab** — Real-time driver positions, fastest lap, session state, gap/interval timing
+- **`LiveTimingServiceProtocol`** — Protocol with `connect()`, `disconnect()`, and `onSnapshot` callback
+- **Mock mode** — In-app `MockLiveTimingService` generates realistic 20-driver snapshots with sector times, pit stops, and track status (toggle in Debug tab)
+- **ViewModel** — `LiveRaceViewModel` connects timing + driver services, maintains sorted positions and driver lookup by number
+
+### Home-Screen Widget
+
+- **`Formula1WidgetExtension`** — iOS widget showing the next race date, P1 driver name, and constructor
+- **Standalone data client** — `WidgetDataService` fetches from Jolpica API directly (no shared container / App Group needed)
+- **Timeline refresh** — Every 30 minutes; fallback to placeholder data on error
+- **Supported size** — System large widget with glassmorphism styling
+
+### Debug Tab
+
+- **Debug settings** — Accessible from the tab bar; toggles persist via `UserDefaults`
+- **Mock mode** — Enables `MockLiveTimingService` for local live-timing simulation
+- **Force live** — Overrides the 3-hour completed-race window for testing live UI states
+- **`DebugSettingsStore`** — Singleton `ObservableObject` with `@Published` properties and `didSet` persistence
+
+### Live Timing Server (Sidecar)
+
+A Python aiohttp WebSocket server (`live_timing_server/`) that wraps the `livef1` library for real F1 timing feeds. For local development, set `MOCK=1` to use the built-in mock generator.
 
 ## Data Sources
 
 | Source | Usage |
 |--------|-------|
 | [F1DB](https://github.com/f1db/f1db) | 83MB historical database (1950–2026): drivers, constructors, circuits, race results, qualifying, pit stops |
-| [Jolpica API](https://jolpica.com) | Live race calendar, driver standings, constructor standings |
+| [Jolpica API](https://jolpica.com) | Live race calendar, driver standings, constructor standings, widget data |
 | [F1 Media CDN](https://media.formula1.com) | Driver headshots, team logos, car images |
 | YouTube (scraped) | Driver/team video thumbnails via `ytInitialData` |
 | [f1-circuits-svg](https://github.com/julesr0y/f1-circuits-svg) | Circuit track maps |
@@ -63,6 +88,24 @@ Tap the gear icon on the "AI Predictions" card to enter your endpoint, API key, 
 4. Build and run
 
 *Optional:* To enable AI predictions, install [Ollama](https://ollama.ai) or get a free Groq API key.
+
+## Testing
+
+Tests are located in `Formula1Tests/` and use both XCTest and Swift Testing frameworks:
+
+### XCTest suites
+- **`F1DBServiceTests`** — Lazy loading, queries (driver, constructor, circuit, race, country, season), average finish, qualifying performance, race history
+- **`F1DBModelDecodingTests`** — JSON decoding for all F1DB model types (Driver, Constructor, Circuit, GrandPrix, Race, RaceResult, QualifyingResult, Country)
+- **`F1DBPredictorTests`** — Score generation, factor breakdown, prediction ranking, win probability normalization
+- **`LiveRaceViewModelTests`** — Connection lifecycle, snapshot updates (positions sorted, fastest lap), driver lookup by number, short code fallback
+- **`MockLiveTimingServiceTests`** — 20-driver snapshot generation, sequential positions, no duplicate numbers, fastest lap validity, session state population, multiple snapshots, callback lifecycle (no callbacks after disconnect)
+
+### Swift Testing suites
+- **`DebugSettingsTests`** — Default values, toggle persistence and independence, UserDefaults round-trip
+- **`LiveRaceModelsTests`** — `LiveDriverPosition` sort order, `LiveFastestLap` initializer, `LiveSessionState` defaults, `TrackStatus` parsing, `LiveRaceSnapshot` model
+
+### CI
+GitHub Actions runs on every push and pull request to `main`: build + test on `macos-latest` with the available iOS simulator.
 
 ## Dependencies
 
