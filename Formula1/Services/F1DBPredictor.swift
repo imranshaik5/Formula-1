@@ -42,6 +42,9 @@ struct F1DBPredictor {
             teamMap = buildTeamMap(season: season)
             driverStandings = season?.driverStandings ?? []
             activeDrivers = filterActiveDrivers(season: season)
+            if activeDrivers.isEmpty {
+                activeDrivers = Self.fallbackDrivers
+            }
         } else {
             teamMap = [:]
             driverStandings = []
