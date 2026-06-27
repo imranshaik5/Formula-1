@@ -10,7 +10,7 @@ final class F1DBServiceTests: XCTestCase {
         service = F1DBService.shared
         service.ensureLoaded()
         let start = Date()
-        while service.isLoading && Date().timeIntervalSince(start) < 10 {
+        while !service.isLoaded && Date().timeIntervalSince(start) < 10 {
             try await Task.sleep(for: .milliseconds(100))
         }
     }

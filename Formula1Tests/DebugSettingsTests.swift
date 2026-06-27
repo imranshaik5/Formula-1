@@ -2,11 +2,12 @@ import Testing
 import Foundation
 @testable import Formula1
 
+@Suite(.serialized)
 struct DebugSettingsTests {
     init() {
-        let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "debug_mockMode")
-        defaults.removeObject(forKey: "debug_forceLive")
+        let s = DebugSettingsStore.shared
+        s.mockModeEnabled = false
+        s.forceLiveRace = false
     }
 
     @Test func defaultsAreCorrect() {
